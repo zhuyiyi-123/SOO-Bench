@@ -1,0 +1,1336 @@
+{
+    "base_config": [
+        {
+            "name": "global_seed",
+            "abbreviation": "gs",
+            "description": "Set the random number seed for the experiment.",
+            "type": "int",
+            "default": 42,
+            "doc": true
+        },
+        {
+            "name": "val_split_ratio",
+            "abbreviation": "vsr",
+            "description": "Ratio to split validate dataset if it is not explicitly given.",
+            "type": "float",
+            "default": 0.5,
+            "doc": true
+        },
+        {
+            "name": "val_split_mode",
+            "abbreviation": "vsm",
+            "description": "Mode of auto splitting training and validation dataset, choose from `outside_traj` and `inside_traj`. `outside_traj` means the split is happened outside the trajectories, one trajectory can only be in one dataset. `inside_traj` means the split is happened inside the trajectories, former part of one trajectory is in training set, later part is in validation set.",
+            "type": "str",
+            "default": "outside_traj",
+            "doc": true
+        },
+        {
+            "name": "ignore_check",
+            "abbreviation": "igc",
+            "description": "Flag to ignore data related check, force training.",
+            "type": "bool",
+            "default": false,
+            "doc": true
+        },
+        {
+            "name": "data_workers",
+            "abbreviation": "dw",
+            "description": "Number of workers to load data.",
+            "type": "int",
+            "default": 0
+        },
+        {
+            "name": "continuous_distribution_type",
+            "abbreviation": "codt",
+            "description": "type of distribution used to model continuous variables, choose from `normal` and `gmm`.",
+            "type": "str",
+            "default": "normal"
+        },
+        {
+            "name": "discrete_distribution_type",
+            "abbreviation": "ddt",
+            "description": "type of distribution used to model discrete variables, choose from `discrete_logistic`, `normal` and `gmm`.",
+            "type": "str",
+            "default": "discrete_logistic"
+        },
+        {
+            "name": "category_distribution_type",
+            "abbreviation": "cadt",
+            "description": "type of distribution used to model category variables, currently only support `onehot`",
+            "type": "str",
+            "default": "onehot"
+        },
+        {
+            "name": "conditioned_std",
+            "description": "Whether the standard deviation is conditioned on the inputs.",
+            "type": "bool",
+            "default": true
+        },
+        {
+            "name": "mixture",
+            "description": "Number of mixtures if use gmm as distribution type.",
+            "type": "int",
+            "default": 5
+        },
+        {
+            "name": "task",
+            "description": "Name of the task, if the task is a simulator.",
+            "type": "str",
+            "default": null,
+            "tune": false
+        },
+        {
+            "name": "venv_rollout_horizon",
+            "abbreviation": "vrh",
+            "description": "Length of sampled trajectory, validate only if the algorithm works on sequential data.",
+            "type": "int",
+            "default": 10,
+            "doc": true
+        },
+        {
+            "name": "transition_mode",
+            "abbreviation": "tsm",
+            "description": "Mode of transition, choose from `global` and `local`.",
+            "type": "str",
+            "default": "global",
+            "doc": true
+        },
+        {
+            "name": "venv_gpus_per_worker",
+            "abbreviation": "vgpw",
+            "description": "Number of gpus per worker in venv training, small than 1 means launch multiple workers on the same gpu.",
+            "type": "float",
+            "default": 1.0,
+            "doc": true
+        },
+        {
+            "name": "venv_metric",
+            "description": "Metric used to evaluate the trained venv, choose from `nll`, `mae`, `mse`, `wdist`.",
+            "type": "str",
+            "default": "mae",
+            "doc": true
+        },
+        {
+            "name": "venv_algo",
+            "description": "Algorithm used in venv training. There are currently three algorithms to choose from, `bc` , `revive_p` and `revive_t`.",
+            "type": "str",
+            "default": "revive_p",
+            "doc": true
+        },
+        {
+            "name": "save_start_epoch",
+            "abbreviation": "sse",
+            "description": "We only save models after this epoch, default is 0 which means we save models from the beginning.",
+            "type": "int",
+            "default": 0
+        },
+        {
+            "name": "num_venv_store",
+            "abbreviation": "nvs",
+            "description": "Max number of the chosen venv among the process of hyper-parameter search.",
+            "type": "int",
+            "default": 5
+        },
+        {
+            "name": "nll_test",
+            "description": "Whether to perform nll test during training, can be overwrite by `venv_metric`.",
+            "type": "bool",
+            "default": true
+        },
+        {
+            "name": "mae_test",
+            "description": "Whether to perform mae test during training, can be overwrite by `venv_metric`.",
+            "type": "bool",
+            "default": true
+        },
+        {
+            "name": "mse_test",
+            "description": "Whether to perform mse test during training, can be overwrite by `venv_metric`.",
+            "type": "bool",
+            "default": true
+        },
+        {
+            "name": "wdist_test",
+            "description": "Whether to perform Wasserstein Distance test during training, can be overwrite by `venv_metric`.",
+            "type": "bool",
+            "default": true
+        },
+        {
+            "name": "save_by_node",
+            "description": "Whether to save the mechanism of the trail model based on the performance of a single node.",
+            "type": "bool",
+            "default": false
+        },
+        {
+            "name": "histogram_log_frequency",
+            "abbreviation": "hlf",
+            "description": "How many steps between two histogram summary. 0 means disable.",
+            "type": "int",
+            "default": 0
+        },
+        {
+            "name": "policy_gpus_per_worker",
+            "abbreviation": "pgpw",
+            "description": "Number of gpus per worker in venv training, small than 1 means launch multiple workers on the same gpu.",
+            "type": "float",
+            "default": 1.0,
+            "doc": true
+        },
+        {
+            "name": "num_venv_in_use",
+            "abbreviation": "nviu",
+            "description": "Max number of venvs used in policy training, clipped when there is no enough venvs available.",
+            "type": "float",
+            "default": 1,
+            "doc": true
+        },
+        {
+            "name": "behavioral_policy_init",
+            "abbreviation": "bpi",
+            "description": "Whether to use the learned behavioral policy to as the initialization policy training.",
+            "type": "bool",
+            "default": true,
+            "doc": true
+        },
+        {
+            "name": "policy_algo",
+            "description": "Algorithm used in policy training. There are currently two algorithms to choose from, `ppo` and `sac`.",
+            "type": "str",
+            "default": "ppo"
+        },
+        {
+            "name": "test_gamma",
+            "description": "Gamma used in venv test.",
+            "type": "float",
+            "default": 1.0
+        },
+        {
+            "name": "test_horizon",
+            "abbreviation": "th",
+            "description": "Rollout length of the venv test.",
+            "type": "int",
+            "default": 10,
+            "doc": true
+        },
+        {
+            "name": "deterministic_test",
+            "abbreviation": "dett",
+            "description": "Whether to use deterministic rollout in venv test.",
+            "type": "bool",
+            "default": true
+        },
+        {
+            "name": "policy_double_validation",
+            "abbreviation": "pdv",
+            "description": "Whether to enable double validation in policy training.",
+            "type": "bool",
+            "default": true
+        },
+        {
+            "name": "real_env_test_frequency",
+            "abbreviation": "retf",
+            "description": "How many steps between two real env test. 0 means disable.",
+            "type": "int",
+            "default": 0
+        },
+        {
+            "name": "fqe_test_frequency",
+            "abbreviation": "ftf",
+            "description": "How many steps between two fqe test.",
+            "type": "int",
+            "default": 25000000000
+        },
+        {
+            "name": "parameter_tuning_algorithm",
+            "abbreviation": "pta",
+            "description": "Algorithm for tuning parameter, support `random` and `zoopt`.",
+            "type": "str",
+            "default": "zoopt"
+        },
+        {
+            "name": "parameter_tuning_budget",
+            "abbreviation": "ptb",
+            "description": "Total trails searched by tuning algorithm.",
+            "type": "int",
+            "default": 10000
+        },
+        {
+            "name": "parameter_tuning_rollout_horizon",
+            "abbreviation": "ptrh",
+            "description": "Rollout horzion when testing parameters, can be overwrote by the data you provide when leaf node on the graph.",
+            "type": "int",
+            "default": 1800
+        },
+        {
+            "name": "use_gpu",
+            "description": "Whether to use gpu during training.",
+            "type": "bool",
+            "default": true
+        },
+        {
+            "name": "use_fp16",
+            "description": "Whether to use mix precision training to speed up the training process, need `apex` being installed.",
+            "type": "bool",
+            "default": false
+        },
+        {
+            "name": "parallel_num",
+            "abbreviation": "pan",
+            "description": "[zoopt] Number of trails searched simultaneously.",
+            "type": "str",
+            "default": "auto"
+        },
+        {
+            "name": "workers_per_trial",
+            "abbreviation": "wpt",
+            "description": "Number of workers per trail, should be set greater than 1 only if gpu per worker is all 1.0.",
+            "type": "int",
+            "default": 1
+        },
+        {
+            "name": "venv_search_algo",
+            "abbreviation": "vsa",
+            "description": "Hyper-parameter search algorithm used in venv training.",
+            "type": "str",
+            "default": "zoopt"
+        },
+        {
+            "name": "train_venv_trials",
+            "abbreviation": "tvt",
+            "description": "Number of total trails searched by the search algorithm in venv training.",
+            "type": "int",
+            "default": 25,
+            "doc": true
+        },
+        {
+            "name": "policy_search_algo",
+            "abbreviation": "psa",
+            "description": "Hyper-parameter search algorithm used in policy training.",
+            "type": "str",
+            "default": "zoopt"
+        },
+        {
+            "name": "train_policy_trials",
+            "abbreviation": "tpt",
+            "description": "Number of total trails searched by the search algorithm in policy training.",
+            "type": "int",
+            "default": 10,
+            "doc": true
+        },
+        {
+            "name": "global_checkpoint_period",
+            "description": "How many seconds between two global checkpoint of tune. DO NOT SET IT TO SMALL VALUES!",
+            "type": "str",
+            "default": "3600"
+        },
+        {
+            "name": "reuse_actors",
+            "description": "whether to allow ray to reuse the old actor to skip the initialization of the new actor.",
+            "type": "bool",
+            "default": false
+        },
+        {
+            "name": "verbose",
+            "description": "level of printed log. `0` means no printed log; `1` means minimal printed log; `2` means full log.",
+            "type": "int",
+            "default": 1
+        }
+    ],
+    "venv_algo_config": {
+        "revive_p": [
+            {
+                "name": "bc_batch_size",
+                "abbreviation": "bbs",
+                "type": "int",
+                "default": 256
+            },
+            {
+                "name": "bc_epoch",
+                "abbreviation": "bep",
+                "type": "int",
+                "default": 0
+            },
+            {
+                "name": "bc_lr",
+                "type": "float",
+                "default": 0.001
+            },
+            {
+                "name": "revive_batch_size",
+                "description": "Batch size of training process.",
+                "abbreviation": "mbs",
+                "type": "int",
+                "default": 1024,
+                "doc": true
+            },
+            {
+                "name": "revive_epoch",
+                "description": "Number of epcoh for the training process",
+                "abbreviation": "mep",
+                "type": "int",
+                "default": 5000,
+                "doc": true
+            },
+            {
+                "name": "matcher_pretrain_epoch",
+                "abbreviation": "dpe",
+                "type": "int",
+                "default": 0
+            },
+            {
+                "name": "revive_rollout_horizon",
+                "abbreviation": "mrh",
+                "type": "int",
+                "default": 10
+            },
+            {
+                "name": "policy_hidden_features",
+                "description": "Number of neurons per layer of the policy network.",
+                "abbreviation": "phf",
+                "type": "int",
+                "default": 256,
+                "doc": true
+            },
+            {
+                "name": "policy_hidden_layers",
+                "description": "Depth of policy network.",
+                "abbreviation": "phl",
+                "type": "int",
+                "default": 4,
+                "doc": true
+            },
+            {
+                "name": "policy_activation",
+                "abbreviation": "pa",
+                "type": "str",
+                "default": "leakyrelu"
+            },
+            {
+                "name": "policy_normalization",
+                "abbreviation": "pn",
+                "type": "str",
+                "default": null
+            },
+            {
+                "name": "policy_backbone",
+                "description": "Backbone of policy network.",
+                "abbreviation": "pb",
+                "type": "str",
+                "default": "res",
+                "doc": true
+            },
+            {
+                "name": "transition_hidden_features",
+                "description": "Number of neurons per layer of the transition network.",
+                "abbreviation": "thf",
+                "type": "int",
+                "default": 256,
+                "doc": true
+            },
+            {
+                "name": "transition_hidden_layers",
+                "abbreviation": "thl",
+                "type": "int",
+                "default": 4,
+                "doc": true
+            },
+            {
+                "name": "transition_activation",
+                "abbreviation": "ta",
+                "type": "str",
+                "default": "leakyrelu"
+            },
+            {
+                "name": "transition_normalization",
+                "abbreviation": "tn",
+                "type": "str",
+                "default": null
+            },
+            {
+                "name": "transition_backbone",
+                "description": "Backbone of Transition network.",
+                "abbreviation": "tb",
+                "type": "str",
+                "default": "res",
+                "doc": true
+            },
+            {
+                "name": "matching_nodes",
+                "type": "list",
+                "default": "auto"
+            },
+            {
+                "name": "matcher_hidden_features",
+                "description": "Number of neurons per layer of the matcher network.",
+                "abbreviation": "dhf",
+                "type": "int",
+                "default": 256,
+                "doc": true
+            },
+            {
+                "name": "matcher_hidden_layers",
+                "description": "Depth of the matcher network.",
+                "abbreviation": "dhl",
+                "type": "int",
+                "default": 4,
+                "doc": true
+            },
+            {
+                "name": "matcher_activation",
+                "abbreviation": "da",
+                "type": "str",
+                "default": "leakyrelu"
+            },
+            {
+                "name": "matcher_normalization",
+                "abbreviation": "dn",
+                "type": "str",
+                "default": null
+            },
+            {
+                "name": "state_nodes",
+                "type": "list",
+                "default": "auto"
+            },
+            {
+                "name": "value_hidden_features",
+                "abbreviation": "vhf",
+                "type": "int",
+                "default": 256
+            },
+            {
+                "name": "value_hidden_layers",
+                "abbreviation": "vhl",
+                "type": "int",
+                "default": 4
+            },
+            {
+                "name": "value_activation",
+                "abbreviation": "va",
+                "type": "str",
+                "default": "leakyrelu"
+            },
+            {
+                "name": "value_normalization",
+                "abbreviation": "vn",
+                "type": "str",
+                "default": null
+            },
+            {
+                "name": "generator_type",
+                "abbreviation": "gt",
+                "type": "str",
+                "default": "res"
+            },
+            {
+                "name": "matcher_type",
+                "abbreviation": "dt",
+                "type": "str",
+                "default": "res"
+            },
+            {
+                "name": "birnn",
+                "type": "bool",
+                "default": false
+            },
+            {
+                "name": "std_adapt_strategy",
+                "abbreviation": "sas",
+                "type": "str",
+                "default": null
+            },
+            {
+                "name": "generator_algo",
+                "abbreviation": "ga",
+                "type": "str",
+                "default": "ppo"
+            },
+            {
+                "name": "ppo_runs",
+                "type": "int",
+                "default": 2
+            },
+            {
+                "name": "ppo_epsilon",
+                "type": "float",
+                "default": 0.2
+            },
+            {
+                "name": "ppo_l2norm_cof",
+                "type": "float",
+                "default": 0
+            },
+            {
+                "name": "ppo_entropy_cof",
+                "type": "float",
+                "default": 0
+            },
+            {
+                "name": "generator_sup_cof",
+                "type": "float",
+                "default": 0
+            },
+            {
+                "name": "gae_gamma",
+                "type": "float",
+                "default": 0.99
+            },
+            {
+                "name": "gae_lambda",
+                "type": "float",
+                "default": 0.95
+            },
+            {
+                "name": "g_steps",
+                "description": "The number of update rounds of the generator in each epoch.",
+                "type": "int",
+                "default": 1,
+                "search_mode": "grid",
+                "search_values": [
+                    1,
+                    3,
+                    5
+                ],
+                "doc": true
+            },
+            {
+                "name": "d_steps",
+                "description": "Number of update rounds of matcher in each epoch.",
+                "type": "int",
+                "default": 1,
+                "search_mode": "grid",
+                "search_values": [
+                    1,
+                    3,
+                    5
+                ],
+                "doc": true
+            },
+            {
+                "name": "g_lr",
+                "description": "Initial learning rate of the generator.",
+                "type": "float",
+                "default": 4e-05,
+                "search_mode": "continuous",
+                "search_values": [
+                    1e-06,
+                    0.0001
+                ],
+                "doc": true
+            },
+            {
+                "name": "d_lr",
+                "description": "Initial learning rate of the matcher.",
+                "type": "float",
+                "default": 0.0006,
+                "search_mode": "continuous",
+                "search_values": [
+                    1e-06,
+                    0.001
+                ],
+                "doc": true
+            },
+            {
+                "name": "matcher_loss_length",
+                "description": "Matcher loss length.",
+                "type": "int",
+                "default": 0
+            },
+            {
+                "name": "matcher_loss_high",
+                "description": "Matcher loss high value. When the matcher_loss beyond the value, the generator would stop train",
+                "type": "float",
+                "default": 1.2
+            },
+            {
+                "name": "matcher_loss_low",
+                "description": "Matcher loss high value. When the matcher_loss low the value, the matcher would stop train",
+                "type": "float",
+                "default": 0.3
+            },
+            {
+                "name": "matcher_sample",
+                "description": "Sample the data for tring the matcher.",
+                "type": "bool",
+                "default": false
+            },
+            {
+                "name": "mae_reward_weight",
+                "description": "reward = (1-mae_reward_weight)*matcher_reward + mae_reward_weight*mae_reward.",
+                "type": "float",
+                "default": 0.25,
+                "doc": true
+            },
+            {
+                "name": "history_matcher_num",
+                "description": "Number of historical discriminators saved.",
+                "type": "int",
+                "default": 0
+            },
+            {
+                "name": "generator_data_repeat",
+                "description": "Repeat rollout more data to train generator.",
+                "type": "int",
+                "default": 1,
+                "doc": true
+            }
+        ],
+        "revive_t": [
+            {
+                "name": "bc_batch_size",
+                "abbreviation": "bbs",
+                "type": "int",
+                "default": 256
+            },
+            {
+                "name": "bc_epoch",
+                "abbreviation": "bep",
+                "type": "int",
+                "default": 0
+            },
+            {
+                "name": "bc_lr",
+                "type": "float",
+                "default": 0.001
+            },
+            {
+                "name": "revive_batch_size",
+                "description": "Batch size of training process.",
+                "abbreviation": "mbs",
+                "type": "int",
+                "default": 256,
+                "doc": true
+            },
+            {
+                "name": "revive_epoch",
+                "description": "Number of epcoh for the training process",
+                "abbreviation": "mep",
+                "type": "int",
+                "default": 1000,
+                "doc": true
+            },
+            {
+                "name": "matcher_pretrain_epoch",
+                "abbreviation": "dpe",
+                "type": "int",
+                "default": 0
+            },
+            {
+                "name": "revive_rollout_horizon",
+                "abbreviation": "mrh",
+                "type": "int",
+                "default": 10
+            },
+            {
+                "name": "policy_hidden_features",
+                "description": "Number of neurons per layer of the policy network.",
+                "abbreviation": "phf",
+                "type": "int",
+                "default": 256,
+                "doc": true
+            },
+            {
+                "name": "policy_hidden_layers",
+                "description": "Depth of policy network.",
+                "abbreviation": "phl",
+                "type": "int",
+                "default": 4,
+                "doc": true
+            },
+            {
+                "name": "policy_activation",
+                "abbreviation": "pa",
+                "type": "str",
+                "default": "leakyrelu"
+            },
+            {
+                "name": "policy_normalization",
+                "abbreviation": "pn",
+                "type": "str",
+                "default": null
+            },
+            {
+                "name": "policy_backbone",
+                "description": "Backbone of policy network.",
+                "abbreviation": "pb",
+                "type": "str",
+                "default": "res",
+                "doc": true
+            },
+            {
+                "name": "transition_hidden_features",
+                "description": "Number of neurons per layer of the transition network.",
+                "abbreviation": "thf",
+                "type": "int",
+                "default": 256,
+                "doc": true
+            },
+            {
+                "name": "transition_hidden_layers",
+                "abbreviation": "thl",
+                "type": "int",
+                "default": 4,
+                "doc": true
+            },
+            {
+                "name": "transition_activation",
+                "abbreviation": "ta",
+                "type": "str",
+                "default": "leakyrelu"
+            },
+            {
+                "name": "transition_normalization",
+                "abbreviation": "tn",
+                "type": "str",
+                "default": null
+            },
+            {
+                "name": "transition_backbone",
+                "description": "Backbone of Transition network.",
+                "abbreviation": "tb",
+                "type": "str",
+                "default": "res",
+                "doc": true
+            },
+            {
+                "name": "matching_nodes",
+                "type": "list",
+                "default": "auto"
+            },
+            {
+                "name": "matcher_hidden_features",
+                "description": "Number of neurons per layer of the matcher network.",
+                "abbreviation": "dhf",
+                "type": "int",
+                "default": 256,
+                "doc": true
+            },
+            {
+                "name": "matcher_hidden_layers",
+                "description": "Depth of the matcher network.",
+                "abbreviation": "dhl",
+                "type": "int",
+                "default": 4,
+                "doc": true
+            },
+            {
+                "name": "matcher_activation",
+                "abbreviation": "da",
+                "type": "str",
+                "default": "leakyrelu"
+            },
+            {
+                "name": "matcher_normalization",
+                "abbreviation": "dn",
+                "type": "str",
+                "default": null
+            },
+            {
+                "name": "state_nodes",
+                "type": "list",
+                "default": "auto"
+            },
+            {
+                "name": "value_hidden_features",
+                "abbreviation": "vhf",
+                "type": "int",
+                "default": 256
+            },
+            {
+                "name": "value_hidden_layers",
+                "abbreviation": "vhl",
+                "type": "int",
+                "default": 4
+            },
+            {
+                "name": "value_activation",
+                "abbreviation": "va",
+                "type": "str",
+                "default": "leakyrelu"
+            },
+            {
+                "name": "value_normalization",
+                "abbreviation": "vn",
+                "type": "str",
+                "default": null
+            },
+            {
+                "name": "generator_type",
+                "abbreviation": "gt",
+                "type": "str",
+                "default": "res"
+            },
+            {
+                "name": "matcher_type",
+                "abbreviation": "dt",
+                "type": "str",
+                "default": "res"
+            },
+            {
+                "name": "birnn",
+                "type": "bool",
+                "default": false
+            },
+            {
+                "name": "std_adapt_strategy",
+                "abbreviation": "sas",
+                "type": "str",
+                "default": null
+            },
+            {
+                "name": "g_steps",
+                "description": "The number of update rounds of the generator in each epoch.",
+                "type": "int",
+                "default": 1,
+                "search_mode": "grid",
+                "search_values": [
+                    1,
+                    3,
+                    5
+                ],
+                "doc": true
+            },
+            {
+                "name": "d_steps",
+                "description": "Number of update rounds of matcher in each epoch.",
+                "type": "int",
+                "default": 1,
+                "search_mode": "grid",
+                "search_values": [
+                    1,
+                    3,
+                    5
+                ],
+                "doc": true
+            },
+            {
+                "name": "g_lr",
+                "description": "Initial learning rate of the generator.",
+                "type": "float",
+                "default": 4e-05,
+                "search_mode": "continuous",
+                "search_values": [
+                    1e-06,
+                    0.0001
+                ],
+                "doc": true
+            },
+            {
+                "name": "d_lr",
+                "description": "Initial learning rate of the matcher.",
+                "type": "float",
+                "default": 0.0006,
+                "search_mode": "continuous",
+                "search_values": [
+                    1e-06,
+                    0.001
+                ],
+                "doc": true
+            },
+            {
+                "name": "matcher_loss_length",
+                "description": "Matcher loss length.",
+                "type": "int",
+                "default": 1
+            },
+            {
+                "name": "matcher_loss_high",
+                "description": "Matcher loss high value. When the matcher_loss beyond the value, the generator would stop train",
+                "type": "float",
+                "default": 1.2
+            },
+            {
+                "name": "matcher_loss_low",
+                "description": "Matcher loss high value. When the matcher_loss low the value, the matcher would stop train",
+                "type": "float",
+                "default": 0.6
+            },
+            {
+                "name": "matcher_sample",
+                "description": "Sample the data for tring the matcher.",
+                "type": "bool",
+                "default": false
+            },
+            {
+                "name": "mae_reward_weight",
+                "description": "reward = (1-mae_reward_weight)*matcher_reward + mae_reward_weight*mae_reward.",
+                "type": "float",
+                "default": 0
+            },
+            {
+                "name": "history_matcher_num",
+                "description": "Number of historical discriminators saved.",
+                "type": "int",
+                "default": 0
+            },
+            {
+                "name": "buffer_size",
+                "description": "Size of the buffer to store data.",
+                "abbreviation": "bfs",
+                "type": "int",
+                "default": 5000.0,
+                "doc": true
+            },
+            {
+                "name": "td3_steps_per_epoch",
+                "description": "td3_steps_per_epoch.",
+                "abbreviation": "tsph",
+                "type": "int",
+                "default": 10,
+                "doc": true
+            }
+        ],
+        "bc": [
+            {
+                "name": "bc_batch_size",
+                "description": "Batch size of training process.",
+                "abbreviation": "bbs",
+                "type": "int",
+                "default": 256,
+                "doc": true
+            },
+            {
+                "name": "bc_epoch",
+                "description": "Number of epcoh for the training process",
+                "abbreviation": "bep",
+                "type": "int",
+                "default": 500,
+                "doc": true
+            },
+            {
+                "name": "bc_horizon",
+                "abbreviation": "bh",
+                "type": "int",
+                "default": 10
+            },
+            {
+                "name": "policy_hidden_features",
+                "description": "Number of neurons per layer of the policy network.",
+                "abbreviation": "phf",
+                "type": "int",
+                "default": 256,
+                "doc": true
+            },
+            {
+                "name": "policy_hidden_layers",
+                "description": "Depth of policy network.",
+                "abbreviation": "phl",
+                "type": "int",
+                "default": 4,
+                "search_mode": "grid",
+                "search_values": [
+                    3,
+                    4,
+                    5
+                ],
+                "doc": true
+            },
+            {
+                "name": "policy_activation",
+                "abbreviation": "pa",
+                "type": "str",
+                "default": "leakyrelu"
+            },
+            {
+                "name": "policy_normalization",
+                "abbreviation": "pn",
+                "type": "str",
+                "default": null
+            },
+            {
+                "name": "policy_backbone",
+                "description": "Backbone of policy network.",
+                "abbreviation": "pb",
+                "type": "str",
+                "default": "res",
+                "search_mode": "grid",
+                "search_values": [
+                    "mlp",
+                    "res"
+                ],
+                "doc": true
+            },
+            {
+                "name": "transition_hidden_features",
+                "abbreviation": "thf",
+                "type": "int",
+                "default": 256
+            },
+            {
+                "name": "transition_hidden_layers",
+                "abbreviation": "thl",
+                "type": "int",
+                "default": 3
+            },
+            {
+                "name": "transition_activation",
+                "abbreviation": "ta",
+                "type": "str",
+                "default": "leakyrelu"
+            },
+            {
+                "name": "transition_normalization",
+                "abbreviation": "tn",
+                "type": "str",
+                "default": "ln"
+            },
+            {
+                "name": "transition_backbone",
+                "description": "Backbone of Transition network.",
+                "abbreviation": "tb",
+                "type": "str",
+                "default": "res"
+            },
+            {
+                "name": "g_lr",
+                "description": "Initial learning rate of the training process.",
+                "type": "float",
+                "default": 0.0001,
+                "search_mode": "continuous",
+                "search_values": [
+                    1e-06,
+                    0.001
+                ],
+                "doc": true
+            },
+            {
+                "name": "weight_decay",
+                "abbreviation": "wd",
+                "type": "float",
+                "default": 0.0001
+            },
+            {
+                "name": "lr_decay",
+                "abbreviation": "ld",
+                "type": "float",
+                "default": 0.99
+            },
+            {
+                "name": "loss_type",
+                "description": "Bc support different loss function(\"log_prob\", \"mae\", \"mse\").",
+                "type": "str",
+                "default": "log_prob",
+                "doc": true
+            }
+        ]
+    },
+    "policy_algo_config": {
+        "ppo": [
+            {
+                "name": "ppo_batch_size",
+                "description": "Batch size of training process.",
+                "abbreviation": "pbs",
+                "type": "int",
+                "default": 256,
+                "doc": true
+            },
+            {
+                "name": "ppo_epoch",
+                "description": "Number of epcoh for the training process",
+                "abbreviation": "bep",
+                "type": "int",
+                "default": 200,
+                "doc": true
+            },
+            {
+                "name": "ppo_rollout_horizon",
+                "description": "Rollout length of the policy train.",
+                "abbreviation": "prh",
+                "type": "int",
+                "default": 100,
+                "doc": true
+            },
+            {
+                "name": "policy_hidden_features",
+                "description": "Number of neurons per layer of the policy network.",
+                "abbreviation": "phf",
+                "type": "int",
+                "default": 256,
+                "doc": true
+            },
+            {
+                "name": "policy_hidden_layers",
+                "description": "Depth of policy network.",
+                "abbreviation": "phl",
+                "type": "int",
+                "default": 4,
+                "doc": true
+            },
+            {
+                "name": "policy_backbone",
+                "description": "Backbone of policy network.",
+                "abbreviation": "pb",
+                "type": "str",
+                "default": "mlp",
+                "doc": true
+            },
+            {
+                "name": "value_hidden_features",
+                "abbreviation": "vhf",
+                "type": "int",
+                "default": 256
+            },
+            {
+                "name": "value_hidden_layers",
+                "abbreviation": "vhl",
+                "type": "int",
+                "default": 4
+            },
+            {
+                "name": "ppo_runs",
+                "type": "int",
+                "default": 2
+            },
+            {
+                "name": "epsilon",
+                "type": "float",
+                "default": 0.2
+            },
+            {
+                "name": "w_vl2",
+                "type": "float",
+                "default": 0.001
+            },
+            {
+                "name": "w_ent",
+                "type": "float",
+                "default": 0.0
+            },
+            {
+                "name": "w_kl",
+                "type": "float",
+                "default": 1.0
+            },
+            {
+                "name": "gae_gamma",
+                "type": "float",
+                "default": 0.99
+            },
+            {
+                "name": "gae_lambda",
+                "type": "float",
+                "default": 0.95
+            },
+            {
+                "name": "g_lr",
+                "description": "Initial learning rate of the training process.",
+                "type": "float",
+                "default": 4e-05,
+                "search_mode": "continuous",
+                "search_values": [
+                    1e-06,
+                    0.001
+                ],
+                "doc": true
+            }
+        ],
+        "sac": [
+            {
+                "name": "sac_batch_size",
+                "description": "Batch size of training process.",
+                "abbreviation": "pbs",
+                "type": "int",
+                "default": 1024,
+                "doc": true
+            },
+            {
+                "name": "sac_epoch",
+                "description": "Number of epcoh for the training process.",
+                "abbreviation": "bep",
+                "type": "int",
+                "default": 200,
+                "doc": true
+            },
+            {
+                "name": "sac_steps_per_epoch",
+                "description": "The number of update rounds of sac in each epoch.",
+                "abbreviation": "sspe",
+                "type": "int",
+                "default": 200,
+                "doc": true
+            },
+            {
+                "name": "sac_rollout_horizon",
+                "abbreviation": "srh",
+                "type": "int",
+                "default": 20
+            },
+            {
+                "name": "policy_hidden_features",
+                "description": "Number of neurons per layer of the policy network.",
+                "abbreviation": "phf",
+                "type": "int",
+                "default": 256,
+                "doc": true
+            },
+            {
+                "name": "policy_hidden_layers",
+                "description": "Depth of policy network.",
+                "abbreviation": "phl",
+                "type": "int",
+                "default": 4,
+                "doc": true
+            },
+            {
+                "name": "policy_backbone",
+                "description": "Backbone of policy network.",
+                "abbreviation": "pb",
+                "type": "str",
+                "default": "mlp",
+                "doc": true
+            },
+            {
+                "name": "q_hidden_features",
+                "abbreviation": "qhf",
+                "type": "int",
+                "default": 256
+            },
+            {
+                "name": "q_hidden_layers",
+                "abbreviation": "qhl",
+                "type": "int",
+                "default": 4
+            },
+            {
+                "name": "buffer_size",
+                "description": "Size of the buffer to store data.",
+                "abbreviation": "bfs",
+                "type": "int",
+                "default": 1000000.0,
+                "doc": true
+            },
+            {
+                "name": "w_kl",
+                "type": "float",
+                "default": 1.0
+            },
+            {
+                "name": "gamma",
+                "type": "float",
+                "default": 0.99
+            },
+            {
+                "name": "alpha",
+                "type": "float",
+                "default": 0.2
+            },
+            {
+                "name": "polyak",
+                "type": "float",
+                "default": 0.99
+            },
+            {
+                "name": "g_lr",
+                "description": "Initial learning rate of the training process.",
+                "type": "float",
+                "default": 4e-05,
+                "search_mode": "continuous",
+                "search_values": [
+                    1e-06,
+                    0.001
+                ],
+                "doc": true
+            }
+        ]
+    }
+}
