@@ -5,7 +5,7 @@ A benchmark suit to verify the performance of your algorithms for solving Offlin
 # Installation
 ### Install benchmark
 ```bash
-git clone https://github.com/zhuyiyi-123/SOO-Bench
+git clone git@github.com:zhuyiyi-123/SOO-Bench.git
 cd ./SOO-Bench
 
 conda create -n SOO_Bench python=3.7 # create a new conda environment
