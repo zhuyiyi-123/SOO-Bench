@@ -1,17 +1,15 @@
 # SOO-Bench
 
-# SOO-Bench
+# SOO-Bench: Benchmarks for Evaluating the Stability of Offline Black-Box Optimization
 
-A benchmark suit to verify the performance of your algorithms for solving Offline MBO problem.
+SOO-Bench is introduced to address the limitations of existing benchmarks in assessing the stability of offline black-box optimization. It specifically targets real-world scenarios where direct evaluation of objective functions is infeasible, risky, or costly, such as in designing molecular formulas or mechanical structures. Unlike traditional optimization benchmarks that focus solely on achieving the optimal solution, SOO-Bench aims to reliably surpass performance metrics of offline datasets during the optimization process. This suite provides diverse offline optimization tasks and datasets in fields like satellite technology, materials science, structural mechanics, and automotive manufacturing, catering to different data distributions.
 
 # Installation
 ### Install benchmark
 ```bash
 git clone git@github.com:zhuyiyi-123/SOO-Bench.git
 cd ./SOO-Bench
-
-conda create -n SOO_Bench python=3.7 # create a new conda environment
-pip install -m requirements.txt 
+conda create -f Soo-bench/environment.yml # create a new conda environment
 ```
 ### Install revive_hybrid
 #### Install revive
@@ -77,6 +75,10 @@ x_after = your_algorithm(x, y)
 
 score, cons = task.predict(x_after)
 print(score)
+```
+## Running Algorithms
+```python
+./run.sh
 ```
 
 ## License
