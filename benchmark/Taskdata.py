@@ -8,9 +8,9 @@ import multiprocessing
 import numpy as np
 import torch
 from tf_bind_8_oracle import TFBind8Oracle
-from design_bench.datasets.discrete.tf_bind_8_dataset import TFBind8Dataset
-from chembl_dataset import ChEMBLDataset
-from random_forest_oracle import RandomForestOracle
+from tf_bind_8_dataset import TFBind8Dataset
+from tf_bind_10_oracle import TFBind10Oracle
+from tf_bind_10_dataset import TFBind10Dataset
 from hybrid_oracle import SearchParams, ISearchParams
 
 
@@ -43,10 +43,9 @@ class OfflineTask:
             oracle = TFBind8Oracle(placeholder_dataset)
             return oracle.predict(design)
         elif self.benchmark == 2:
-            placeholder_dataset = ChEMBLDataset()
-            oracle = RandomForestOracle(placeholder_dataset)
-            # print("design:", design)
-            return oracle.predict(design[0])
+            placeholder_dataset = TFBind10Dataset()
+            oracle = TFBind10Oracle(placeholder_dataset)
+            return oracle.predict(design)
 
     def predict(self, x):
         x = np.array(x)
@@ -196,13 +195,6 @@ class OfflineTask:
 
     
     def filter_useful(self, dataset, cons = None):
-        '''
-        Filter useful data points from the given dataset based on the task's constraints.
-        If there are no constraints, return the entire dataset.
-        :param dataset: The input dataset containing multiple data points.
-        :param cons: Optional parameter, if provided, it represents the constraints corresponding to the data points.
-        :return: Returns two lists, the first containing useful data points that meet the constraints, and the second containing useless data points that do not meet the constraints.
-        '''
         if self.is_constraint() == False:
             return dataset, []
         
@@ -219,12 +211,6 @@ class OfflineTask:
         
         
     def _sample_x_ignore_constraints(self, num=2):
-        '''
-        Generate a specified number of random data points, ignoring constraints.
-        These data points are uniformly randomly generated across the entire search space of the variables.
-        :param num: The number of data points to generate.
-        :return: The generated array of data points.
-        '''
         # random.seed(0)
         # numpy.random.seed(0)
         # torch.manual_seed(0)
@@ -252,15 +238,6 @@ class OfflineTask:
         return self.x
 
     def sample_x(self, num=2, / , rate_satisfying_constraints=0.4, maxtry=10000000):
-        '''
-        Generate a specified number of data points while considering constraints.
-        This method attempts to generate data points that satisfy the constraints and controls the proportion of data points that meet the constraints.
-        Ensures that result[:int(num*rate_satisfying_constraints)] meet the constraints.
-        :param num: The total number of data points to generate.
-        :param rate_satisfying_constraints: The desired proportion of data points that meet the constraints.
-        :param maxtry: The maximum number of attempts, if exceeded without generating enough data points that meet the constraints, an exception is thrown.
-        :return: Returns an array containing the generated data points.
-        '''
         assert(0 <= rate_satisfying_constraints <= 1)
         assert(maxtry >= 0)
         
@@ -271,7 +248,7 @@ class OfflineTask:
             torch.cuda.manual_seed(self.seed)
         
         seek_size = 512
-        # seek_rate = 0
+        seek_rate = 0
         notfound = True
         
         if self.is_constraint() == False: 
@@ -289,22 +266,22 @@ class OfflineTask:
                 if turn_id == maxtry:
                     raise Exception('Failed when generating constraint dataset. Max try excessed.')
                 
-                
+
                 x = self._sample_x_ignore_constraints(seek_size)
                 useful, useless = self.filter_useful(x)
-                # print(len(useful), len(useless))
+                print(len(useful), len(useless))
 
-                # seek_rate = len(useful) / seek_size
-                # if seek_rate>0: notfound = False
+                seek_rate = len(useful) / seek_size
+                if seek_rate>0: notfound = False
                 
-                # if seek_rate == 0:
-                #     seek_size *= 2
-                #     if notfound and seek_size > 100000:
-                #         raise Exception('Failed when generating constraint dataset. Valid solution not found')
-                # else:
-                #     seek_size = int((expected_n - len(final_useful) - len(useful)) / seek_rate * 1.2)
+                if seek_rate == 0:
+                    seek_size *= 2
+                    if notfound and seek_size > 100000:
+                        raise Exception('Failed when generating constraint dataset. Valid solution not found')
+                else:
+                    seek_size = int((expected_n - len(final_useful) - len(useful)) / seek_rate * 1.2)
                     
-                # seek_size = min(seek_size, int(1e6))
+                seek_size = min(seek_size, int(1e6))
                 
 
                 final_useful += useful

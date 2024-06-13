@@ -69,31 +69,10 @@ class make(object):
             self.xu = [1825.0, 5.0, 1.0, 1.0, 500.0, 800.0, 800.0, 800.0, 1850.0, 0.9, 0.9, 0.9, 0.9, 0.9, 9.0, 9.0,
                        9.0, 9.0, np.pi, np.pi, np.pi, np.pi]
         elif benchmark == 7:
-            """"benchmark name is Sagas"""
-            self.obj_num = 1
-            self.var_num = 12
-            self.con_num = 2
-            self.xl = [7000.0, 0.0, 0.0, 0.0, 50.0, 300.0, 0.01, 0.01, 1.05, 8.0, -np.pi, -np.pi]
-            self.xu = [9100.0, 7.0, 1.0, 1.0, 2000.0, 2000.0, 0.9, 0.9, 7.0, 500.0, np.pi, np.pi]
-        elif benchmark == 8:
             """"benchmark name is Cassini1-MINLP"""
             self.obj_num = 1
             self.var_num = 10
             self.con_num = 4
-            self.xl = [-1000.0, 30.0, 100.0, 30.0, 400.0, 1000.0, 1.0, 1.0, 1.0, 1.0]
-            self.xu = [0.0, 400.0, 470.0, 400.0, 2000.0, 6000.0, 9.0, 9.0, 9.0, 9.0]
-        elif benchmark == 9:
-            """"benchmark name is Cassini1-MO"""
-            self.obj_num = 2
-            self.var_num = 6
-            self.con_num = 5
-            self.xl = [-1000.0, 30.0, 100.0, 30.0, 400.0, 1000.0]
-            self.xu = [0.0, 400.0, 470.0, 400.0, 2000.0, 6000.0]
-        elif benchmark == 10:
-            """"benchmark name is Cassini1-MO-MINLP"""
-            self.obj_num = 2
-            self.var_num = 10
-            self.con_num = 5
             self.xl = [-1000.0, 30.0, 100.0, 30.0, 400.0, 1000.0, 1.0, 1.0, 1.0, 1.0]
             self.xu = [0.0, 400.0, 470.0, 400.0, 2000.0, 6000.0, 9.0, 9.0, 9.0, 9.0]
         return self.obj_num, self.var_num, self.con_num, self.xl, self.xu
@@ -171,10 +150,10 @@ class make(object):
             self.xu = [3, 3, 3, 3, 3, 3, 3, 3]
         elif benchmark == 2:
             self.obj_num = 1
-            self.var_num = 31
+            self.var_num = 10
             self.con_num = 0
-            self.xl = [12, 15, 15, 15, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-            self.xu = [12, 37, 79, 184, 37, 44, 60, 45, 41, 46, 45, 55, 39, 41, 42, 46, 42, 57, 36, 57, 28, 34, 23, 42, 26, 42, 25, 25, 22, 19, 13]
+            self.xl = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            self.xu = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
         return self.obj_num, self.var_num, self.con_num, self.xl, self.xu
 
         

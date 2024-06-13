@@ -1,6 +1,6 @@
-from design_bench.oracles.exact_oracle import ExactOracle
-from design_bench.datasets.discrete_dataset import DiscreteDataset
-from design_bench.datasets.discrete.tf_bind_8_dataset import TFBind8Dataset
+from exact_oracle import ExactOracle
+from discrete_dataset import DiscreteDataset
+from tf_bind_8_dataset import TFBind8Dataset
 import numpy as np
 
 
