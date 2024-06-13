@@ -80,9 +80,5 @@ print(score)
 ./run.sh
 ```
 
-## License
-
-
-## Contact us
 
 
