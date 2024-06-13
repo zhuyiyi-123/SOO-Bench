@@ -11,9 +11,6 @@ git clone git@github.com:zhuyiyi-123/SOO-Bench.git
 cd ./SOO-Bench
 conda create -f Soo-bench/environment.yml # create a new conda environment
 ```
-### Install revive_hybrid
-#### Install revive
-    pip install -e ./revive_hybrid
 #### Modify torch setting
 ##### View the location of ``torch`` in the current SOO-Bench environment by
 
@@ -56,8 +53,10 @@ seed = 0
 task = OfflineTask(task = taskname,  benchmark=benchmarkid, seed = seed)
 
 # generate sample list 'x'
-x = task.sample_x(num=10000)
-y, cons = task.sample_y() # generate score list 'y' and constraint function value list 'cons' corresponding to x
+task.sample_bound(num=10000, low=0, high=100)
+x = task.x
+y, cons = task.y, task.cons # generate score list 'y' and constraint function value list 'cons' corresponding to x
+
 
 # filter the samples that violate the constraints.
 if task.is_constraint():
