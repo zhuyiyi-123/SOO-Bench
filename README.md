@@ -1,5 +1,3 @@
-# SOO-Bench
-
 # SOO-Bench: Benchmarks for Evaluating the Stability of Offline Black-Box Optimization
 
 ![](./src/Figure1.png)
