@@ -350,9 +350,6 @@ print(task.predict(task.x))
 
 **Constraints:** You can choose whether there are constraints on the task, for example, `benchmark=0` means constrained problem, and `benchmark=1` means unconstrained problem in hybrid task.
 
-## :email: Contact
-
-Should you have any questions and comments, post an issue here, or feel free to contact [Yiyi Zhu](yiyizhu@stu.ecnu.edu.cn), [Yaolin Wen](wyl576215697@126.com) and [Hong Qian]().
 
 
 
