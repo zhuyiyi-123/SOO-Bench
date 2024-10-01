@@ -1,0 +1,115 @@
+Polixir Technologies, Co. Ltd.
+
+COMMERCIAL SOFTWARE LICENSE AGREEMENT
+
+PLEASE READ THE FOLLOWING TERMS AND CONDITIONS CAREFULLY BEFORE DOWNLOADING,
+INSTALLING OR USING THE POLIXIR SOFTWARE THAT ACCOMPANIES THIS SOFTWARE LICENSE
+AGREEMENT OR ANY ACCOMPANYING DOCUMENTATION (COLLECTIVELY, AND INCLUDING ANY
+UPDATES THERETO PROVIDED BY POLIXIR, THE “SOFTWARE”).
+
+THE TERMS AND CONDITIONS OF THIS SOFTWARE LICENSE AGREEMENT AND THE ORDER FOR
+THE SOFTWARE THAT YOU AGREED TO (“ORDER”), AND [(WHERE APPLICABLE) ANY POLIXIR
+LICENSE KEY INFORMATION (“LICENSE KEY” AND, [COLLECTIVELY WITH THE ORDER AND] THIS
+SOFTWARE LICENSE AGREEMENT, THIS “AGREEMENT”) ARE AN AGREEMENT BETWEEN YOU
+AND POLIXIR TECHNOLOGIES, CO. LTD. (“POLIXIR”) AND GOVERN USE OF THE SOFTWARE,
+UNLESS YOU AND POLIXIR HAVE EXECUTED A SEPARATE WRITTEN AGREEMENT GOVERNING USE
+OF THE SOFTWARE.
+
+Polixir is willing to license the Software to you only upon the condition that you accept all the
+terms contained in this Agreement. By downloading, installing or using the Software, you have
+indicated that you understand this Agreement and accept all of its terms. If you are accepting the
+terms of this Agreement on behalf of a company or other legal entity, you represent and warrant
+that you have the authority to bind that company or other legal entity to the terms of this
+Agreement, and, in such event, “you” and “your” will refer to that company or other legal
+entity. If you do not accept all of the terms of this Agreement, then Polixir is unwilling to license
+the Software to you, and you must return the Software to Polixir or destroy all copies of the
+Software.
+
+License
+
+1. Ownership and Licensed Use
+1.1. Ownership: Polixir owns all the intellectual property rights of the licensed product; Polixir
+only licenses the product, not sells or transfers it.
+1.2. Licensed use: After paying the corresponding license fee, you have the non-exclusive,
+non-transferable right to use the licensed product only for your own product design, simulation,
+execution or manufacturing needs, and is subject to the use agreed in this agreement limit.
+
+2. Restrictions on use: Without the written authorization and consent of our company, you may
+not:
+2.1. Allow any of your affiliates, subsidiaries or branches, any third party to copy, access or use
+any part of the licensed product;
+2.2. Make a copy of the licensed product for use by any of your other affiliates, subsidiaries or
+branches, or any third party;
+2.3. Allow persons exceeding the permitted number to access and use the licensed product at
+any one time.
+2.4. Publicize, publish, rent, sell, transfer, share, sublicense the licensed product with
+compensation or without compensation, or copy it for non-archive purposes and other
+commercial purposes.
+
+3. Special statement
+3.1. The encrypted code and free and open source code in the licensed product are for your own
+use only and may not be shared with others in any way.
+3.2. You can modify the free and open source code in the licensed product, but any modification
+will not affect all Polixir's intellectual property rights of the licensed product. At the same time,
+Polixir has an unlimited right to use your modified product without compensation.
+3.3. Reverse engineering is prohibited: under any circumstances, you shall not decode, reverse
+engineer or decompile the licensed product or any part thereof, or disclose or share the licensed
+product to any third party for the purpose of reverse engineering Any part.
+
+4. Intellectual Property
+All intellectual property rights in the licensed product are the exclusive property of Polixir. Any
+use, modification or improvement of the licensed product by you shall not be construed as
+granting you any ownership, license or other rights other than those stipulated in this agreement.
+
+5. Confidentiality
+You should keep the licensed product and all its information confidential. You promise to take
+adequate measures to ensure the confidentiality of licensed products, and the confidentiality
+period is not restricted by the license period.
+
+6. Licensing model
+6.1. The licensing models of licensed products are:
+6.1.1. Short-term trial mode
+6.1.2. Device binding mode
+6.1.2. Volume authorization mode
+6.2. The license model only describes the authorized use scope of the licensed product, and the
+content of this agreement covers all license models. For details of license purchase, please refer
+to this agreement [Purchase]
+
+7. No Warranty.
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND. POLIXIR DISCLAIMS
+ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY IMPLIED
+WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT, AND ANY WARRANTIES ARISING OUT OF COURSE OF DEALING OR USAGE
+OF TRADE. NO ADVICE OR INFORMATION, WHETHER ORAL OR WRITTEN, OBTAINED FROM
+POLIXIR OR ELSEWHERE WILL CREATE ANY WARRANTY NOT EXPRESSLY STATED IN THIS
+AGREEMENT.
+
+8. Limitation of Liability
+8.1. If Polixir violates the obligations of this agreement, its full responsibility shall be limited to
+the sum of all the fees for the corresponding licensed products that you paid to Polixir in the
+previous [six] months. Polixir is not responsible for your data loss, loss of profit, loss of goodwill
+or any special, indirect, punitive or derivative damages related to any breach of contract.
+8.2 Polixir has not made any promise to you that the use of licensed products will result in profits
+or any other results or benefits. You completely rely on your own technology and judgment to
+voluntarily obtain licensed products.
+8.3 Nothing under this agreement is intended to exclude or limit Polixir’s liability under any law
+within the jurisdiction of the country where it is domiciled.
+
+9. Other agreements
+9.1. This agreement applies to the laws of the People's Republic of China.
+9.2. If there is any ambiguity in the interpretation of the Chinese and English versions of this
+agreement, the Chinese version shall prevail.
+9.3. Disputes in this agreement shall be resolved through friendly negotiation; if the negotiation
+fails, it shall be submitted to the Shanghai Branch of the China International Economic and Trade
+Arbitration Commission for arbitration.
+9.4. The content listed under [Purchase] under this agreement is an integral part of this
+agreement.
+
+[Purchase]
+- For individual users or stand-alone licenses, after registering and logging on to the website
+revive.cn, purchase them on the website.
+- For business users or multi-machine networking and distributed computing licenses, please 
+contact business@polixir.ai
+
+[Contact]
+For questions related to this agreement, please contact business@polixir.ai
