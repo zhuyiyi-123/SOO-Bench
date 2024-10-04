@@ -62,14 +62,6 @@ class SearchParams:
 
     def search(self, mode_inputs: np.ndarray, parallel_inputs: np.ndarray, series_speed: np.ndarray,
                series_torque: np.ndarray):
-        """
-        获取参数结果。支持批量运算。
-        :param mode_inputs: 模式边界值输入: n * mode_inputs_dims
-        :param parallel_inputs: 并联边界值输入: n * parallel_inputs_dims
-        :param series_speed: 串联转速输入: n * series_speed_dims
-        :param series_torque: 串联扭矩输入: n * series_torque_dims
-        :return: results: 输入参数的返回结果: n * 1
-        """
         search_data = self.prepare_search_inputs(mode_inputs, parallel_inputs, series_speed, series_torque)
         inputs = self.process_data(search_data)
         with torch.no_grad():
@@ -81,13 +73,6 @@ class SearchParams:
         return results, tra_info, result_info
 
     def get_results(self, tra, fuel_w=1., mode_w=10., soc_w=10.):
-        """
-        compute the return of trajectory.
-        return contains sevral parts:
-        1. fuel reward: 油耗, 主要目标
-        2. soc legalization punishment: 目标空间的约束, 电量变化在合理范围内
-        3. starting engine punishment: 这个好像没有体现? 反倒是一个解空间的约束
-        """
         fuel_ratio = tra["fuel"].sum(0)
         fuel_ratio_2_fuel = lambda x: x / 626.765002440701
         fuel = fuel_ratio_2_fuel(fuel_ratio)
@@ -133,7 +118,6 @@ class SearchParams:
         punish_mode = (mode_index[..., [0]] > mode_index[..., [3]]) * 1. + (
                 mode_index[..., [4]] < mode_index[..., [6]]) * 1.
 
-        # 假设delta_soc在[-1, 2]之间为合理范围, 若delta soc小于-1或delta soc大于2则惩罚为delta_soc绝对值
         constraints = []
         start_soc = tra["soc"][0]
         last_soc = tra["next_soc"][-1]
@@ -165,9 +149,6 @@ class SearchParams:
         return depro_data
 
     def process_data(self, search_data):
-        """
-        归一化等数据处理
-        """
         data = deepcopy(self.data)
         data.update(search_data)
         for k, v in data.items():
@@ -180,9 +161,6 @@ class SearchParams:
 
     def prepare_search_inputs(self, mode_inputs: np.ndarray, parallel_inputs: np.ndarray, series_speed: np.ndarray,
                               series_torque: np.ndarray):
-        """
-        预处理参数输入
-        """
         if mode_inputs.ndim > 1:
             assert mode_inputs.shape[0] == parallel_inputs.shape[0] == series_speed.shape[0] == series_torque.shape[0]
         else:
@@ -202,14 +180,7 @@ class SearchParams:
         return data
 
 
-def array2dict(x): # 24/5/10
-    '''
-        把二维数组型方案数据转化为SearchParam.search()可接受的参数形式
-        parameter:
-            x: 二维数组，其中元素是单个方案数据
-        return:
-            一个字典,其键包括'mode_inputs', 'parallel_inputs', 'series_speed','series_torque'
-    '''
+def array2dict(x): 
     xx = np.array(x, dtype=np.float32)
     
     mode_inputs = xx[:, 0:7]
@@ -223,11 +194,7 @@ def array2dict(x): # 24/5/10
             'series_torque':series_torque
             }
 
-def dict2array(x): # 24/5/10
-    '''
-        array2dict逆操作,把字典转化为原二维数组的形式
-        x: 一个字典,其键包括'mode_inputs', 'parallel_inputs', 'series_speed','series_torque'
-    '''
+def dict2array(x): 
     assert(len(x['mode_inputs']) == len(x['parallel_inputs']) == len(x['series_speed']) == len(x['series_torque']) )
 
     ret = np.concatenate((x['mode_inputs'], x['parallel_inputs'],x['series_speed'], x['series_torque']), axis=1)
@@ -235,7 +202,7 @@ def dict2array(x): # 24/5/10
 
 
 
-class ISearchParams: # 24/5/10
+class ISearchParams: 
     '''SearchParams 与OfflineDataSet类间接口'''
     def __init__(self, batch = 128):
         self.search_params = SearchParams()
