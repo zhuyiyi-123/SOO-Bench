@@ -615,16 +615,16 @@ class PolicyOperator(TrainingOperator):
                          clip : bool = False):
         r"""Generate trajectories based on current policy.
 
-        Args：
+        Args:
             :expert_data: sampled data from the dataset.
 
-            :target_policy： target_policy
+            :target_policy: target_policy
 
-            :env： env
+            :env: env
 
-            :traj_length： traj_length
+            :traj_length: traj_length
 
-            :maintain_grad_flow： maintain_grad_flow
+            :maintain_grad_flow: maintain_grad_flow
 
         Return: 
             batch trajectories
