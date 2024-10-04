@@ -1,17 +1,3 @@
-''''''
-"""
-    POLIXIR REVIVE, copyright (C) 2021-2022 Polixir Technologies Co., Ltd., is 
-    distributed under the GNU Lesser General Public License (GNU LGPL). 
-    POLIXIR REVIVE is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either
-    version 3 of the License, or (at your option) any later version.
-
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Lesser General Public License for more details.
-"""
 import os
 import ray
 import json
@@ -244,7 +230,7 @@ class TuneVenvTrain(object):
         from ray import tune
         self.logger.update.remote(key="task_state", value="Run")
 
-        torchTrainable = self.algo.get_trainable(self.config)  # 动态获取该算法对应的trainable对象(适配tune.run)
+        torchTrainable = self.algo.get_trainable(self.config)  
         tune_params = self.algo.get_tune_parameters(self.config)
         
         # Seet the seed
@@ -306,7 +292,7 @@ class VenvTrain(object):
         self.config = config
         self.logger = logger
 
-        self.algo = VenvAlgorithm(self.config["venv_algo"])  # 指定venv的训练算法
+        self.algo = VenvAlgorithm(self.config["venv_algo"])  
         if 'venv_algo_config' in config.keys() and self.config['venv_algo'] in config['venv_algo_config'].keys():
             update_description(self.algo.operator.PARAMETER_DESCRIPTION, config['venv_algo_config'][self.config['venv_algo']])
         self.config.update(self.algo.get_parameters(command))
@@ -317,7 +303,7 @@ class VenvTrain(object):
     def train(self):
         self.logger.update.remote(key="task_state", value="Run")
         
-        trainer = self.algo.get_trainer(self.config)  # 动态获取该算法对应的trainer对象
+        trainer = self.algo.get_trainer(self.config)  
         
         # Seet the seed
         setup_seed(self.config["global_seed"])
