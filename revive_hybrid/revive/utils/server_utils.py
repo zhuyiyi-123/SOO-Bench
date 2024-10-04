@@ -292,7 +292,7 @@ class VenvTrain(object):
         self.config = config
         self.logger = logger
 
-        self.algo = VenvAlgorithm(self.config["venv_algo"])  # 指定venv的训练算法
+        self.algo = VenvAlgorithm(self.config["venv_algo"]) 
         if 'venv_algo_config' in config.keys() and self.config['venv_algo'] in config['venv_algo_config'].keys():
             update_description(self.algo.operator.PARAMETER_DESCRIPTION, config['venv_algo_config'][self.config['venv_algo']])
         self.config.update(self.algo.get_parameters(command))
