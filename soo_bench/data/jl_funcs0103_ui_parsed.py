@@ -138,7 +138,7 @@ def engine_policy(inputs):
 
 def next_mode_node(data: Dict[str, np.ndarray]):
     """
-    Expert function node, output the current混动 mode, next_mode corresponds to the node name in the revive graph, the same as next transition.
+    Expert function node, output the current hybrid mode, next_mode corresponds to the node name in the revive graph, the same as next transition.
     Input: The previous mode, the current SOC, the current speed, the current brake, the current demand power
     Output: The current mode
     """
