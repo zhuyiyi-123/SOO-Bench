@@ -200,7 +200,6 @@ def dict2array(x):
 
 
 class ISearchParams: 
-    '''SearchParams 与OfflineDataSet类间接口'''
     def __init__(self, batch = 128):
         self.search_params = SearchParams()
         self.batch = batch
