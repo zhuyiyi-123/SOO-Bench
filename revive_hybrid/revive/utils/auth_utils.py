@@ -25,8 +25,6 @@ def customer_createTrain(machineCode: str,
                         ):
     """ 
     Verify the user's training privileges.
-    
-    API Reference: https://polixir.yuque.com/puhlon/rwxlag/gu7pg8#uFKnl 
     """
     url = base_url + "api/customer/createTrain"
     
@@ -65,8 +63,6 @@ def customer_uploadTrainFile(trainId: str,
                             ):
     """ 
     Upload the history train log.
-    
-    API Reference: https://polixir.yuque.com/puhlon/rwxlag/gu7pg8#r5IPw
     """
     url = base_url + "api/customer/uploadTrainFile"
 
@@ -102,8 +98,6 @@ def customer_uploadTrainLog(trainId: str,
                             ):
     """ 
     Upload the log after a trail is trained.
-    
-    API Reference: https://polixir.yuque.com/puhlon/rwxlag/gu7pg8#KvKWx
     """
     url = base_url + "api/customer/uploadTrainLog"
 
