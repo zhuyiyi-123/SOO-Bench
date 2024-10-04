@@ -3,12 +3,11 @@ from setuptools import setup, find_packages
 setup(
     name='soo_bench',
     version='0.2.0', 
-    author='Zhu Yiyi', 
-    author_email='wyl576125697@126.com', 
+    # author='111', 
+    # author_email='111.com', 
     description='Benchmarks for Evaluating the Stability of Offline Black-Box Optimization',  
     long_description=open('README.md', encoding='utf-8').read(), 
     long_description_content_type='text/markdown',  
-    url='https://github.com/zhuyiyi-123/SOO-Bench',  
     py_modules=['soo_bench'],
     packages=find_packages(), 
     classifiers=[
