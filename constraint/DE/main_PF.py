@@ -48,7 +48,7 @@ class DE():
             p1, p2 = random.sample(list(self.pop), 2)
             while (self.pop[seq] == p1).all() or (self.pop[seq] == p2).all():
                 p1, p2 = random.sample(list(self.pop), 2)
-            newp = self.pop[seq] + F * (p2 - p1) # 生成并取整新个体
+            newp = self.pop[seq] + F * (p2 - p1) 
             newp = np.max(np.vstack((newp, [self.min_value]*self.chrom_length)), 0)
             newp = np.min(np.vstack((newp, [self.max_value]*self.chrom_length)), 0)
             self.pop = np.row_stack((self.pop, newp))
