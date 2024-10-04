@@ -76,7 +76,6 @@ class Logger(object):
             os.makedirs(log_dir)
     
     def record_solutions_epoch(self, e, solutions, results, results_info):
-        """记录一个epoch内各个解的具体情况
 
         Args:
             e (_type_): _description_
@@ -106,7 +105,6 @@ class Logger(object):
         return 1
     
     def record_solution(self, solution, result, result_info, e_path):
-        """记录单个解的具体情况
 
         Args:
             solution (_type_): _description_
@@ -130,7 +128,6 @@ class Logger(object):
         return 1
 
     def record_results(self, results):
-        """记录整个优化过程的结果.
 
         Args:
             results (_type_): _description_
