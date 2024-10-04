@@ -63,7 +63,7 @@ class DE():
                 else:newp[i] = self.pop[seq][i]
             newp = np.max(np.vstack((newp, [self.min_value]*self.chrom_length)), 0)
             newp = np.min(np.vstack((newp, [self.max_value]*self.chrom_length)), 0)
-            self.pop[seq + self.pop_size] = newp  # 代替变异个体
+            self.pop[seq + self.pop_size] = newp 
 
     def judge(self, v, cons_num, o):
         w = 0
@@ -82,7 +82,7 @@ class DE():
 
         newpop = np.zeros((self.pop_size, self.chrom_length))
         for i in range(self.pop_size):
-            if newfit[i] < newfit[i + self.pop_size]:  # 最小化<, 最大化>
+            if newfit[i] < newfit[i + self.pop_size]: 
                 newpop[i] = self.pop[i]
             else: newpop[i] = self.pop[i + self.pop_size]
         
