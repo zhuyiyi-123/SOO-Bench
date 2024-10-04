@@ -139,9 +139,6 @@ class SearchParams:
         return fuel, constraints, result_info
 
     def deprocess_data(self, data):
-        """
-        反归一化
-        """
         out = self.env.graph.processor.deprocess_torch(data)
         depro_data = {}
         for k, v in out.items():
