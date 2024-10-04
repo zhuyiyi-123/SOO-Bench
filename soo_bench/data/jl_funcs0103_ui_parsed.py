@@ -117,23 +117,23 @@ def engine_policy(inputs):
     need_w = inputs[2:3]
     # need_w = np.clip(a_driver, 0, np.inf)
     engine_index = inputs[3:]
-    zhuansu_index = engine_index[:53]
+    speed_index = engine_index[:53]
     niuju_index = engine_index[53:106]
     bing_index = engine_index[106:]
     if mode == 2:
-        chuan_zhuansu_p = interp1d(FIXED_CHUAN_NEEDW_INDEX, zhuansu_index, fill_value='extrapolate')
+        chuan_speed_p = interp1d(FIXED_CHUAN_NEEDW_INDEX, speed_index, fill_value='extrapolate')
         chuan_niuju_p = interp1d(FIXED_CHUAN_NEEDW_INDEX, niuju_index, fill_value='extrapolate')
-        engine_zhuansu = chuan_zhuansu_p(need_w)
+        engine_speed = chuan_speed_p(need_w)
         engine_niuju = chuan_niuju_p(need_w)
     elif mode == 5:
         bing_needed_t = w_2_t(need_w, speed)
-        engine_zhuansu = v_2_engine_v(speed)
+        engine_speed = v_2_engine_v(speed)
         bing_niuju_p = interp1d(GLOBAL_BING_ZS, GLOBAL_BING_NJ, fill_value='extrapolate')
-        bing_niuju = bing_niuju_p(engine_zhuansu)
+        bing_niuju = bing_niuju_p(engine_speed)
         engine_niuju = np.clip(bing_needed_t, bing_index[-1] * bing_niuju, bing_index[0] * bing_niuju)
     else:
-        engine_zhuansu, engine_niuju = 0., 0.
-    return np.array([engine_zhuansu, engine_niuju]).flatten()
+        engine_speed, engine_niuju = 0., 0.
+    return np.array([engine_speed, engine_niuju]).flatten()
 
 
 def next_mode_node(data: Dict[str, np.ndarray]):
