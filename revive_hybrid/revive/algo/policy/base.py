@@ -1,18 +1,3 @@
-''''''
-"""
-    POLIXIR REVIVE, copyright (C) 2021-2022 Polixir Technologies Co., Ltd., is 
-    distributed under the GNU Lesser General Public License (GNU LGPL). 
-    POLIXIR REVIVE is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either
-    version 3 of the License, or (at your option) any later version.
-
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Lesser General Public License for more details.
-"""
-
 import os
 import ray
 import torch
@@ -628,16 +613,16 @@ class PolicyOperator(TrainingOperator):
                          clip : bool = False):
         r"""Generate trajectories based on current policy.
 
-        Args：
+        Args:
             :expert_data: sampled data from the dataset.
 
-            :target_policy： target_policy
+            :target_policy: target_policy
 
-            :env： env
+            :env: env
 
-            :traj_length： traj_length
+            :traj_length: traj_length
 
-            :maintain_grad_flow： maintain_grad_flow
+            :maintain_grad_flow: maintain_grad_flow
 
         Return: 
             batch trajectories
