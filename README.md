@@ -16,11 +16,6 @@ SOO-Bench can be installed with the complete set of benchmarks via our pip packa
 
 Firstly, SOO-Bench can be downloaded from github and installed using anaconda.
 
-```bash
-git clone git@github.com:zhuyiyi-123/SOO-Bench.git
-cd ./SOO-Bench
-```
-
 
 ### Quick Installation
 
