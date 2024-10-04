@@ -281,7 +281,7 @@ python ./scripts/getresult_SI_translator.py
 To reproduce the performance of baseline algorithm reported in our work, you may then run `./run.sh` in each method directory. At the same time, please ensure that the conda environment `soo-bench-mp` is activated in the bash session.
 
 ## hardware environment 
-we have test different hardware environment， including:
+we have test different hardware environment, including:
 * Ubuntu 20.04, 1 × 2080Ti, CUDA 11.8
 * Ubuntu 20.04, 1 × 3080Ti, CUDA 11.8
 * Ubuntu 22.04, 1 × 3090, CUDA 12.0
