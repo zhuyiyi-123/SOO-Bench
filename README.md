@@ -14,7 +14,7 @@ Offline optimization aims to make full use of the offline data and finally recom
 
 SOO-Bench can be installed with the complete set of benchmarks via our pip package. For a stable installation and usage, we suggest that you use `CUDA version 11.7`  or higher. 
 
-Firstly, SOO-Bench can be downloaded from github and installed using anaconda.
+Firstly, SOO-Bench can be installed using anaconda.
 
 
 ### Quick Installation
