@@ -29,7 +29,7 @@ class SearchParams:
         self.env = self._load_env()
         self.data = self._load_data()
         self.tra_num = None
-        self.tra_len = 1801  # 默认轨迹长度1801
+        self.tra_len = 1801 
         self.demo_inputs = self.get_demo_inputs()
 
         self.mode_inputs_dims = self.demo_inputs["mode_inputs"].shape[0]
@@ -81,7 +81,7 @@ class SearchParams:
         punish_mode = (mode_index[..., [0]] > mode_index[..., [3]]) * 1. + (
                 mode_index[..., [4]] < mode_index[..., [6]]) * 1.
 
-        # 假设delta_soc在[-1, 2]之间为合理范围, 若delta soc小于-1或delta soc大于2则惩罚为delta_soc绝对值
+        # Assume that delta_soc is in the reasonable range of [-1, 2]. If delta soc is less than -1 or delta soc is greater than 2, the penalty is the absolute value of delta_soc.
         start_soc = tra["soc"][0]
         last_soc = tra["next_soc"][-1]
         delta_soc = (last_soc - start_soc)
