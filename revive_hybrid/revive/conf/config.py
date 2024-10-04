@@ -18,8 +18,6 @@ import torch
 from revive.utils.common_utils import set_parameter_value
 
 
-base_url = "https://revive.cn:8082/"
-
 DEFAULT_CONFIG = [
     {
         'name' : 'global_seed',
