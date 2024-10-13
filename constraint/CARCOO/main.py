@@ -70,12 +70,27 @@ def arcoo(args):
     
     optimizer = Optimizer(opt_config, task, trainer, init_xt, init_yt, dhs_model=dhs_model)
 
+    # calculate the offline best score
     scores = optimizer.optimize(uc)
+    useful = []
+    for i in range(len(task.x)):
+        if np.all(np.array(task.cons[i]) >= 0):
+            useful.append(task.y[i])
+        else:
+            # useless.append(y[i])
+            pass
+            
+    if len(useful)>0:
+        offlineBest = np.max(useful)
+    else:
+        offlineBest = np.nan
+    scores = [offlineBest] + list(scores)
+    
     print('Scores: ', scores)
     print('Final Score', scores[-1])
     
     # save results
-    save_name = 'CArcoo' + '-' + args.task + '-' + str(args.benchmark) + '-' +str(args.seed) + '-' + str(args.num) + '-'+ str(args.low) + '-' + str(args.high)
+    save_name = 'CARCOO' + '-' + args.task + '-' + str(args.benchmark) + '-' +str(args.seed) + '-' + str(args.num) + '-'+ str(args.low) + '-' + str(args.high)
     current_dir = os.path.dirname(os.path.abspath(__file__))
     for i in range(2):
         current_dir = os.path.dirname(current_dir)
