@@ -9,8 +9,6 @@ tasks=("gtopx_data" "hybrid_data" "mujoco_data")
 benchmarks_gtopx_data=(2 3 4 6)
 benchmarks_hybrid_data=(1)
 benchmarks_mujoco_data=(1 2)
-benchmarks_nano_data=(1 2)
-
 ## gtopx_data tasks
 task=gtopx_data
 for b in "${benchmarks_gtopx_data[@]}"; do
