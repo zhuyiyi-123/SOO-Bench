@@ -100,6 +100,8 @@ def main(rootpath, save_to):
     if len(savedata) == 0:
         print('[WARNNING] result not found at {}'.format(rootpath))
         return
+
+    os.makedirs(os.path.dirname(save_to), exist_ok=True)
     with open(save_to, 'w', newline='', encoding='utf-8') as file:
         writer = csv.DictWriter(file, fieldnames=savedata[0].keys())
         writer.writeheader()
