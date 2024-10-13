@@ -5,10 +5,6 @@ import random
 import numpy as np
 import torch
 import pickle
-from soo_bench.protein.tf_bind_8_oracle import TFBind8Oracle
-from soo_bench.protein.tf_bind_8_dataset import TFBind8Dataset
-from soo_bench.protein.tf_bind_10_oracle import TFBind10Oracle
-from soo_bench.protein.tf_bind_10_dataset import TFBind10Dataset
 try:
     from soo_bench.hybrid_oracle import SearchParams, ISearchParams
 except ImportError:
