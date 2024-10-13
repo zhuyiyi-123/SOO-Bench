@@ -113,7 +113,20 @@ def coms_cleaned(args):
             scores.append(score_max)
             constraints.append(constraint)
             predictions.append(prediction)
-            
+
+    # calculate the offline best score
+    useful = []
+    for i in range(len(task.x)):
+        if np.all(np.array(task.cons[i]) >= 0):
+            useful.append(task.y[i])
+        else:
+            # useless.append(y[i])
+            pass
+    if len(useful)>0:
+        offlineBest = np.max(useful)
+    else:
+        offlineBest = np.nan
+    scores = [offlineBest] + list(scores)
 
     print('scores:', scores)
     save_name = 'PRIME' + '-' + args.task +'-'+ str(args.benchmark)+ '-' + str(args.seed) + '-' + str(args.num) + '-'+ str(args.low) + '-' + str(args.high)
