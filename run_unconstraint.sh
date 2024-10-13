@@ -5,7 +5,7 @@ low=(0 10 20 25 30 40 0 0 0 0 0)
 high=(50 60 70 75 80 90 60 70 80 90 100)
 seed=(0 1 2 3 4 5 6 7)
 
-tasks=("gtopx_data" "hybrid_data" "mujoco_data" "nano_data")
+tasks=("gtopx_data" "hybrid_data" "mujoco_data")
 benchmarks_gtopx_data=(2 3 4 6)
 benchmarks_hybrid_data=(1)
 benchmarks_mujoco_data=(1 2)
