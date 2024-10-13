@@ -193,6 +193,20 @@ if __name__ == '__main__':
         if score[1][0][i] < 0:
             score[0][0] = min(y)
     scores.append(score[0].tolist())
+    # calculate the offline best score
+    useful = []
+    for i in range(len(task.x)):
+        if np.all(np.array(task.cons[i]) >= 0):
+            useful.append(task.y[i])
+        else:
+            # useless.append(y[i])
+            pass
+    if len(useful)>0:
+        offlineBest = np.max(useful)
+    else:
+        offlineBest = np.nan
+    scores = [offlineBest] + list(scores)
+
 
 
     save_name = 'DEPF' + '-' + args.task + '-'+ str(args.benchmark)+ '-' + str(args.seed) + '-' + str(args.num) + '-'+ str(args.low) + '-' + str(args.high)
