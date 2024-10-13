@@ -19,7 +19,11 @@ def getInfo(path,dataset, benchmark,seed,num):
     f=open(path,'rb')
     data=pickle.load(f)
 
-    is_pointlist = (len(np.shape(data[0])) >=1)
+    if (len(np.shape(data[0])) >1):
+        is_pointlist = True
+    else:
+        is_pointlist = False
+        data = np.reshape(data, np.size(data))
     if is_pointlist:
         print(f'[INFO] Data in "{path}" is a pointlist. Resolving...')
         from soo_bench.Taskdata import OfflineTask
