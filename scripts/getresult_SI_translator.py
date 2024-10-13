@@ -186,6 +186,7 @@ def main(csv_file, save_to):
 
 
     savedata = after
+    os.makedirs(os.path.dirname(save_to), exist_ok=True)
     with open(save_to, 'w', newline='', encoding='utf-8') as file:
         writer = csv.DictWriter(file, fieldnames=savedata[0].keys())
         writer.writeheader()
