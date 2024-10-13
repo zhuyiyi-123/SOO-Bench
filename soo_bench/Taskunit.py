@@ -531,6 +531,9 @@ class Task_mujoco(TaskUnit):
     TASK_NAME = 'mujoco_data'
     def init(self, benchmark, seed, *args, **kwargs):
         if benchmark == 1:
+            from soo_bench.protein.tf_bind_8_oracle import TFBind8Oracle
+            from soo_bench.protein.tf_bind_8_dataset import TFBind8Dataset
+            
             self.obj_num = 1
             self.var_num = 8
             self.con_num = 0
@@ -539,6 +542,9 @@ class Task_mujoco(TaskUnit):
             placeholder_dataset = TFBind8Dataset()
             self.oracle = TFBind8Oracle(placeholder_dataset)
         elif benchmark == 2:
+            from soo_bench.protein.tf_bind_10_oracle import TFBind10Oracle
+            from soo_bench.protein.tf_bind_10_dataset import TFBind10Dataset
+            
             self.obj_num = 1
             self.var_num = 10
             self.con_num = 0
