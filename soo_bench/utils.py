@@ -76,7 +76,7 @@ class Logger(object):
             os.makedirs(log_dir)
     
     def record_solutions_epoch(self, e, solutions, results, results_info):
-
+        """
         Args:
             e (_type_): _description_
             solutions (_type_): _description_
@@ -105,7 +105,7 @@ class Logger(object):
         return 1
     
     def record_solution(self, solution, result, result_info, e_path):
-
+        """
         Args:
             solution (_type_): _description_
             result (_type_): _description_
@@ -128,7 +128,7 @@ class Logger(object):
         return 1
 
     def record_results(self, results):
-
+        """
         Args:
             results (_type_): _description_
 
