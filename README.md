@@ -299,7 +299,7 @@ You can perform advanced customization on several sections, as follows:
 task.sample_bound(n, low=0, high=100)
 ```
 
-**Data distribution:** Uniform distribution is too simple, and users can override the way data is sampled to adjust the difficulty of the task. Here is a example.
+**Data distribution:** Uniform distribution is too simple, and users can override the way data is sampled to adjust the difficulty of the task. Here is an example.
 ```python
 # in your python code
 import numpy as np
