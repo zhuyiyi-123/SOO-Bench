@@ -68,8 +68,8 @@ class OfflineTask:
     def _sample_x_ignore_constraints(self, num=2):
         return self.taskunit._sample_x_ignore_constraints(num)
 
-    def sample_x(self, num=2 , rate_satisfying_constraints=0.4, maxtry=10000000, print_info=True):
-        return self.taskunit.sample_x(num, rate_satisfying_constraints, maxtry, print_info)
+    def sample_x(self, num=2 , rate_satisfying_constraints=0.4, maxtry=10000000,seek_size=512, print_info=True):
+        return self.taskunit.sample_x(num, rate_satisfying_constraints, maxtry,seek_size, print_info)
             
         
         
