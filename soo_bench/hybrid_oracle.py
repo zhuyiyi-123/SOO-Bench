@@ -128,7 +128,8 @@ class SearchParams:
         # constraints.append(punish_mode)
         # constraints.append(punish_soc)
         for i in range(len(punish_mode)):
-            constraints.append([punish_mode[i,0], punish_soc[i,0]])
+            # constraints.append([punish_mode[i,0], punish_soc[i,0]])
+            constraints.append([-punish_mode[i], -punish_soc[i,0]]))
         # print('constraints = ', constraints)
         # result_info = {
         #     "fuel": fuel,
