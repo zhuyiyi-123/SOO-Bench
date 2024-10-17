@@ -168,7 +168,10 @@ class ConservativeObjectiveModel(tf.Module):
 
                 # calculate the prediction error and accuracy of the model
                 d_pos = self.forward_model(self.pos_x, training=True)
-                mse = tf.keras.losses.mean_squared_error(self.pos_y, d_pos)
+                if tf.version.VERSION.startswith('1.'):
+                    mse = tf.keras.losses.mean_squared_error(self.pos_y, d_pos)
+                else:
+                    mse = tf.compat.v1.losses.mean_squared_error(self.pos_y, d_pos)
                 statistics[f'train/mse'] = mse
                 mse2 = tf.reduce_mean(self.forward_model(self.neg_x_cons, training=True))
 
@@ -229,7 +232,10 @@ class ConservativeObjectiveModel(tf.Module):
 
         # calculate the prediction error and accuracy of the model
         d_pos = self.forward_model(x, training=False)
-        mse = tf.keras.losses.mean_squared_error(y, d_pos)
+        if tf.version.VERSION.startswith('1.'):
+                mse = tf.keras.losses.mean_squared_error(y, d_pos)
+            else:
+                mse = tf.compat.v1.losses.mean_squared_error(y, d_pos)
         statistics[f'validate/mse'] = mse
 
         # evaluate how correct the rank fo the model predictions are
@@ -266,7 +272,10 @@ class ConservativeObjectiveModel(tf.Module):
             for name, tensor in self.validate_step(x, y).items():
                 statistics[name].append(tensor)
         for name in statistics.keys():
-            statistics[name] = tf.concat(statistics[name], axis=0)
+            try:
+                statistics[name] = tf.concat(statistics[name], axis=0)
+            except:
+                statistics[name] = tf.stack(statistics[name], axis=0)
         return statistics
 
     def launch(self, train_data, validate_data, epochs):
