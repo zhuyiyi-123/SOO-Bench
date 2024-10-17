@@ -127,6 +127,8 @@ class SearchParams:
         # total_return = - legal_soc * fuel * fuel_w - punish_mode * mode_w - punish_soc * soc_w
         # constraints.append(punish_mode)
         # constraints.append(punish_soc)
+        punish_mode = punish_mode.squeeze() # updated
+        punish_soc = punish_soc.squeeze() # updated
         for i in range(len(punish_mode)):
             # constraints.append([punish_mode[i,0], punish_soc[i,0]])
             constraints.append([-punish_mode[i], -punish_soc[i,0]]))
