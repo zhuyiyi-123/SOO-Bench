@@ -48,6 +48,8 @@ class OfflineTask:
 
     def predict(self, x):
         x = np.array(x)
+        if np.size(x) == 0: # updated
+            return np.array([]), np.array([]) # updated
     
         if len(np.shape(x)) == 1:
             return self.predict([x])
