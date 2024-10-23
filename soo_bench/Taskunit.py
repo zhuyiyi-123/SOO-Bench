@@ -147,7 +147,7 @@ class TaskUnit:
                 if print_info:
                     print('now generating constraint dataset: ', len(final_useful), '/', expected_n, 'turn_id: ', turn_id, '/', maxtry, end='\r')
                 
-                if len(final_useful) >= expected_n and len(final_useless) >= num - expected_n:'
+                if len(final_useful) >= expected_n and len(final_useless) >= num - expected_n:
                     
                     break
                 
