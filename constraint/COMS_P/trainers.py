@@ -234,7 +234,7 @@ class ConservativeObjectiveModel(tf.Module):
         d_pos = self.forward_model(x, training=False)
         if tf.version.VERSION.startswith('1.'):
                 mse = tf.keras.losses.mean_squared_error(y, d_pos)
-            else:
+        else:
                 mse = tf.compat.v1.losses.mean_squared_error(y, d_pos)
         statistics[f'validate/mse'] = mse
 
