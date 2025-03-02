@@ -1,0 +1,9 @@
+transformers
+botorch<0.9
+tensorflow
+tensorflow_probability==0.24
+higher
+h5py
+tf_keras
+numpy<1.24
+cma
