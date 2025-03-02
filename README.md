@@ -322,6 +322,15 @@ print(task.predict(task.x))
 
 **Constraints:** You can choose whether there are constraints on the task, for example, `benchmark=1` means constrained problem, and `benchmark=2` means unconstrained problem in gtopx task.
 
-
+## Citation
+```
+@inproceedings{qian2025soobench,
+ author = {Hong Qian and Yiyi Zhu and Xiang Shu and Shuo Liu and Yaolin Wen and Xin An and Huakang Lu and Aimin Zhou and Ke Tang and Yang Yu},
+ booktitle = {Proceedings of the 13th International Conference on Learning Representations},
+ title = {Constrained Offline Black-Box Optimization via Risk Evaluation and Management},
+ year = {2025},
+ address = {Singpore}
+}
+```
 
 
