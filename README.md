@@ -327,7 +327,7 @@ print(task.predict(task.x))
 @inproceedings{qian2025soobench,
  author = {Hong Qian and Yiyi Zhu and Xiang Shu and Shuo Liu and Yaolin Wen and Xin An and Huakang Lu and Aimin Zhou and Ke Tang and Yang Yu},
  booktitle = {Proceedings of the 13th International Conference on Learning Representations},
- title = {Constrained Offline Black-Box Optimization via Risk Evaluation and Management},
+ title = {SOO-Bench: Benchmarks for Evaluating the Stability of Offline Black-Box Optimization},
  year = {2025},
  address = {Singapore}
 }
