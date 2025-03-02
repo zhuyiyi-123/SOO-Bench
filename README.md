@@ -329,7 +329,7 @@ print(task.predict(task.x))
  booktitle = {Proceedings of the 13th International Conference on Learning Representations},
  title = {Constrained Offline Black-Box Optimization via Risk Evaluation and Management},
  year = {2025},
- address = {Singpore}
+ address = {Singapore}
 }
 ```
 
