@@ -244,7 +244,7 @@ ls ./results_different_n/summary/details/
 ```
 ## :information_source: Baselines
 
-To reproduce the performance of baseline algorithm reported in our work, you may then run `./run.sh` in the root directory of this project. At the same time, please ensure that the conda environment `soo-bench-mp` is activated in the bash session. If you want to run a specific distribution, you can run the corresponding `.sh` file, for example, the distribution setting used in our paper is `run_constraint_y_ood.sh` and `run_constraint_x_ood.sh`.
+To reproduce the performance of baseline algorithm reported in our work, you may then run `./run.sh` in the root directory of this project. At the same time, please ensure that the conda environment `soo-bench-mp` is activated in the bash session. If you want to run a specific distribution, you can run the corresponding `.sh` file, for example, the distribution setting used in our paper is `run_constraint_y_ood.sh` and `run_unconstraint_y_ood.sh`.
 
 ## hardware environment 
 we have test different hardware environment, including:
