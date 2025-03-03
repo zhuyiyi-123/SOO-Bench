@@ -238,24 +238,13 @@ print(score)
 ```
 After the algorithms finished, their results will be saved in 
 ``` bash
-ls ./results/constraint
-ls ./results/unconstraint
+ls ./results_y_ood/summary/details/
+ls ./results_x_ood/summary/details/
+ls ./results_different_n/summary/details/
 ```
-You can gather these results using following scripts:
-
-```bash
-# gather these results as csv files
-python ./scripts/result_gather.py
-# the csv file will be saved at
-# ./results/summary/details/
-# and zipped at
-# ./results/summary/details.zip
-
-```
-
 ## :information_source: Baselines
 
-To reproduce the performance of baseline algorithm reported in our work, you may then run `./run.sh` in each method directory. At the same time, please ensure that the conda environment `soo-bench-mp` is activated in the bash session.
+To reproduce the performance of baseline algorithm reported in our work, you may then run `./run.sh` in the root directory of this project. At the same time, please ensure that the conda environment `soo-bench-mp` is activated in the bash session. If you want to run a specific distribution, you can run the corresponding `.sh` file, for example, the distribution setting used in our paper is `run_constraint_y_ood.sh` and `run_constraint_x_ood.sh`.
 
 ## hardware environment 
 we have test different hardware environment, including:
