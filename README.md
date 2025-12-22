@@ -32,7 +32,7 @@
 
 ![](./src/Figure1.png)
 
-This repository contains the code of "SOO-Bench: Benchmarks for Evaluating the Stability of Offline Black-Box Optimization". Unlike traditional benchmarks that focus primarily on identifying the optimal solution, SOO-Bench incorporates a **stability indicator** specifically designed to assess the stability of algorithms throughout the whole optimization process. Additionally, this suite provides a diverse array of offline optimization tasks and datasets spanning various fields such as satellite technology, materials science, structural mechanics, and automotive manufacturing. Each component is **highly customizable**, allowing adjustments in data sampling distribution, task complexity, constraints, and more.
+🎉 This repository contains the code of "SOO-Bench: Benchmarks for Evaluating the Stability of Offline Black-Box Optimization". Unlike traditional benchmarks that focus primarily on identifying the optimal solution, SOO-Bench incorporates a **stability indicator** specifically designed to assess the stability of algorithms throughout the whole optimization process. Additionally, this suite provides a diverse array of offline optimization tasks and datasets spanning various fields such as satellite technology, materials science, structural mechanics, and automotive manufacturing. Each component is **highly customizable**, allowing adjustments in data sampling distribution, task complexity, constraints, and more.
 
 # :page_facing_up: Offline Black-Box Optimization
 
