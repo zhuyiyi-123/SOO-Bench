@@ -14,10 +14,10 @@
 </p>
 
 <p align="center">
-  ¹ East China Normal University<br>
-  ² Southern University of Science and Technology<br>
-  ³ Nanjing University<br>
-  ⁴ Polixir Technologies, China
+  ¹ <strong>East China Normal University</strong><br>
+  ² <strong>Southern University of Science and Technology</strong><br>
+  ³ <strong>Nanjing University</strong><br>
+  ⁴ <strong>Polixir Technologies, China</strong>
 </p>
 
 
