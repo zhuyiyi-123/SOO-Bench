@@ -19,9 +19,9 @@
 
 <p align="center">
   <a href="https://openreview.net/forum?id=bqf0aCF3Dd">
-    <img src="https://img.shields.io/badge/Paper-arXiv-red" />
+    <img src="https://img.shields.io/badge/Paper-ICLR-red" />
   </a>
-  <a href="link">
+  <a href="[link](https://github.com/zhuyiyi-123/SOO-Bench)">
     <img src="https://img.shields.io/badge/GitHub-Repo-black" />
   </a>
 </p>
