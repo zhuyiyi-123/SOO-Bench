@@ -47,25 +47,49 @@ SOO-Bench can be installed with the complete set of benchmarks via our pip packa
 Firstly, SOO-Bench can be installed using anaconda.
 
 
+## 🛠️ Installation
+
+### Prerequisites
+
+* Python 3.8+
+* CUDA 11.8 or higher (recommended)
+* Conda package manager
+
+Tested on:
+
+* Ubuntu 20.04, 1 × 2080Ti, CUDA 11.8
+* Ubuntu 20.04, 1 × 3080Ti, CUDA 11.8
+* Ubuntu 22.04, 1 × 3090, CUDA 12.0
+
 ### Quick Installation
 
 ```bash
-# install soo-bench
+# Clone the repository
+git clone https://github.com/zhuyiyi-123/SOO-Bench.git
+cd SOO-Bench
+
+# Create a conda environment
+conda create -n soo-bench python=3.8 -y
+conda activate soo-bench
+
+
+# Install SOO-Bench
 pip install -e .
 
-# install dependencies of algorithms
+# Install dependencies of baselines
+
 pip install -r requirements.txt
+```
 
+### Test Installation
 
-### Test installation
-Run following code in the environment just established as a test.
 ```python
 from soo_bench.Taskdata import OfflineTask, REGISTERED_TASK
 
 print(REGISTERED_TASK.keys())
 # dict_keys(['gtopx_data', 'cec_data', 'mujoco_data'])
 
-# test gtopx
+# Test GTOPX benchmark
 task = OfflineTask('gtopx_data', benchmark=2, seed=1)
 
 num = 2
@@ -75,273 +99,209 @@ x = task.x
 y = task.y
 print(x)
 print(y)
-
 ```
-## :construction_worker: Usage
-### 1. generate data
-``` python
-from soo_bench.Taskdata import OfflineTask,REGISTERED_TASK
+
+## 🔍 File System
+
+```bash
+.
+├── README.md
+├── requirements.txt
+├── setup.py
+├── install.sh
+├── run.sh
+├── run_*.sh 
+├── src/
+│   ├── Figure1.png
+│   └── Figure2.png
+├── soo_bench/
+│   ├── __init__.py
+│   ├── Taskdata.py
+│   ├── Taskunit.py
+│   ├── utils.py
+│   ├── gtopx.dll
+│   ├── gtopx.so
+│   ├── protein/ 
+│   └── design_bench_data/ 
+├── unconstraint/ (unconstrained optimization algorithms)
+│   ├── CC-DDEA/
+│   ├── ARCOO/
+│   ├── CMAES/
+│   ├── Tri-mentoring/
+│   └── CBAS/
+├── constraint/ (constrained optimization algorithms)
+├── scripts/
+│   └── result_gather.py
+└── paper/
+    └── SOO_Bench.pdf
+```
+
+- `soo_bench/`: Core package containing task data handling and algorithm implementations
+- `src/`: Contains figures and visualizations used in documentation
+- `unconstraint/`: Directory containing unconstrained optimization algorithms
+- `constraint/`: Directory containing constrained optimization algorithms
+- `scripts/`: Utility scripts for result processing
+- `run.sh`: Main script to run all baseline algorithms
+- `run_*.sh`: Scripts for specific distribution settings
+
+## 🚦 Usage
+
+### 1. Generate Data
+
+```python
+from soo_bench.Taskdata import OfflineTask, REGISTERED_TASK
 
 task = OfflineTask(task='gtopx_data', benchmark=1, seed=1)
-print('parameter "task" can be:',REGISTERED_TASK.keys())
+print('Available tasks:', REGISTERED_TASK.keys())
 
-#method 1 (Recommended)
+# Method 1 (Recommended)
 n = 10
 task.sample_bound(n)
 x = task.x
 y = task.y
-print(x,y)
+print(x, y)
 
-# method 2
+# Method 2
 n = 10
 task.sample_x(n)
 task.sample_y()
 x = task.x
 y = task.y
-print(x,y)
+print(x, y)
 ```
-### 2. use oracle function
+
+### 2. Use Oracle Function
+
 ```python
 from soo_bench.Taskdata import OfflineTask
 import numpy as np
+
 task = OfflineTask(task='gtopx_data', benchmark=1, seed=1)
 x = task.sample_x()
 y = task.sample_y()
 
-ndim = task.var_num # dimension of x
+ndim = task.var_num  # dimension of x
 xx = np.array([.0 for i in range(ndim)])
-yy,cons = task.predict(xx) # return the oracle function value of xx and the constraint function value. 
-# if the task is a unconstraint task, 'cons' is useless.
+yy, cons = task.predict(xx)  # returns oracle function value and constraint values
 print(yy, cons)
 ```
 
-### 3. add your own dataset
-More examples can be seen in `soo_bench.Taskunit`. Here we make a simple one.
+### 3. Add Custom Dataset
+
 ```python
-# in your python code
 import numpy as np
 from soo_bench.Taskdata import OfflineTask, register_task
 from soo_bench.Taskunit import TaskUnit
 
-# step1: define your own dataset
+# Define custom dataset
 class Task_simple(TaskUnit):
-    TASK_NAME = 'simple_data' # the name of your task
+    TASK_NAME = 'simple_data'
 
     def init(self, benchmark, seed, *args, **kwargs):
-        '''
-        Define your dataset, can be multiple benchmarks.
-        This function nessary to override in every new TaskUnit. Will be executed in __init__
-        
-        self.obj_num, self.var_num, self.xl,self.yl
-        must be set.
-        '''
         if benchmark == 1: 
-            self.obj_num = 1 # number of objectives
-            self.var_num = 2 # number of sample dimension
-            self.con_num = 0 # number of constraint functions
-            self.xl = [ -10,  -10] # lower_bound of every dimension
-            self.xu = [10, 10] # upper_bound of every dimension
-        elif benchmark == 2:
             self.obj_num = 1
             self.var_num = 2
-            self.con_num = 1 # benchmark 2 has 1 constraint
-            self.xl = [-10,-10,-10]
-            self.xu = [10,20,30]
+            self.con_num = 0
+            self.xl = [-10, -10]
+            self.xu = [10, 10]
+        elif benchmark == 2:
+            self.obj_num = 1
+            self.var_num = 3
+            self.con_num = 1
+            self.xl = [-10, -10, -10]
+            self.xu = [10, 20, 30]
         else:
-            raise Exception(f"benchmark {benchmark} is not found in task {self.__class__.__name__}")
+            raise Exception(f"benchmark {benchmark} not found")
     
-    def predict(self, x:np.ndarray):
-        '''
-        Define your oracle function and constraint functions(if any).
-        Notice that your objective is to maximize this function.
-        It is nessary to override. 
-
-        x has already been transformed to 2-d np.array.
-        '''
-        
+    def predict(self, x: np.ndarray):
         if self.benchmark == 1:
-            # unconstraint benchmark
-            # y = -(x1^2 + x2^2)
-            result = - x[:,0] **2 - x[:, 1]**2
-            return result, 0 # value, constraint(no constraints)
+            result = -x[:,0]**2 - x[:,1]**2
+            return result, 0
         elif self.benchmark == 2:
-            # constraint benchmark
-            # y = -(x1^2 + x2^2 + x3^2)
-            result = - x[:,0] **2 - x[:, 1]**2 - x[:,2]**2
-            
+            result = -x[:,0]**2 - x[:,1]**2 - x[:,2]**2
             g = np.zeros((len(x), 1))
-            # s.t. g1 = x1 + x2 >= 0
-            g[:,0] = x[:, 0]+ x[:,1]**2
-            
-            return result, g # value, constraint
+            g[:,0] = x[:,0] + x[:,1]**2
+            return result, g
 
-# step2: register your own dataset
-register_task('simple_data',Task_simple)
-
-# step3: use it
+# Register and use custom dataset
+register_task('simple_data', Task_simple)
 task = OfflineTask('simple_data', benchmark=1, seed=1)
 task.sample_bound(10)
 print(task.x)
 print(task.y)
-print(task.predict(task.x))
-
-task = OfflineTask('simple_data', benchmark=2, seed=1)
-task.sample_bound(10)
-print(task.x)
-print(task.y)
-print(task.predict(task.x))
-
 ```
-### 4.use cache to accelerate data generating process
-you can use cache to accelerate the sampling.
+
+### 4. Use Cache for Acceleration
+
 ```python
-import numpy as np
-from soo_bench.Taskdata import OfflineTask, register_task, \
-                            set_use_cache,change_cache_path,clear_cache, CACHE_PATH
+from soo_bench.Taskdata import set_use_cache, change_cache_path, clear_cache
 
-set_use_cache(True) # if need to use cache to accelerate `task.sample_bound`
-# change_cache_path('./your_cache_path') # if not given, cache will be saved in default path 
-clear_cache() # will clear previous saved cache
+set_use_cache(True)  # Enable cache for acceleration
+# change_cache_path('./your_cache_path')  # Custom cache path
+clear_cache()  # Clear previous cache
 
 task = OfflineTask('gtopx_data', benchmark=2, seed=1)
-task.sample_bound(10)
-print(task.x)
-print(task.y)
-
-
-task = OfflineTask('gtopx_data', benchmark=2, seed=1)
-task.sample_bound(10) # will use the cache
-print(task.x)
-print(task.y)
-
-task = OfflineTask('gtopx_data', benchmark=2, seed=1)
-x = task.sample_x(10) # will NOT use the cache
-y = task.sample_y()
+task.sample_bound(10)  # Uses cache for acceleration
 print(task.x)
 print(task.y)
 ```
 
+### 5. Run Benchmark Algorithms
 
-### 5.An example to use the dataset
-
-```python
-import numpy as np
-from soo_bench.Taskdata import *
-
-def your_algorithm(x,y):
-    'repace this to your real algorithm function'
-    return [x[0]]
-
-set_use_cache(True)
-taskname = 'gtopx_data' # explained later
-benchmarkid = 1 # explained later
-seed = 0
-
-task = OfflineTask(task = taskname,  benchmark=benchmarkid, seed = seed)
-
-# generate sample list 'x'
-task.sample_bound(num=10000, low=0, high=100)
-x = task.x
-y, cons = task.y, task.cons # generate score list 'y' and constraint function value list 'cons' corresponding to x
-
-
-# filter the samples that violate the constraints.
-if task.is_constraint():
-    # a valid samples is defined that every constraint function value is non negtive. 
-    indx = []
-    for con in cons:
-        indx.append(np.all(con>=0))
-    x = x[indx]
-    y = y[indx]
-    cons = cons[indx]
-
-x_after = your_algorithm(x, y)
-# Apply your optimization algorithm to the dataset.
-# The 'your_algorithm' is a placeholder for the actual algorithm you would use.
-
-score, cons = task.predict(x_after)
-print(score)
-```
-## :computer_mouse: Run Algorithms
-```python
+```bash
+# Run all algorithms
 ./run.sh
 ```
-After the algorithms finished, their results will be saved in 
-``` bash
+
+Results will be saved in:
+```bash
 ls ./results_y_ood/summary/details/
 ls ./results_x_ood/summary/details/
 ls ./results_different_n/summary/details/
 ```
-## :information_source: Baselines
 
-To reproduce the performance of baseline algorithm reported in our work, you may then run `./run.sh` in the root directory of this project. At the same time, please ensure that the conda environment `soo-bench-mp` is activated in the bash session. If you want to run a specific distribution, you can run the corresponding `.sh` file, for example, the distribution setting used in our paper is `run_constraint_y_ood.sh` and `run_unconstraint_y_ood.sh`.
-
-## hardware environment 
-we have test different hardware environment, including:
-* Ubuntu 20.04, 1 × 2080Ti, CUDA 11.8
-* Ubuntu 20.04, 1 × 3080Ti, CUDA 11.8
-* Ubuntu 22.04, 1 × 3090, CUDA 12.0
-
-
-## :art: Customization
+## 🎨 Customization
 
 You can perform advanced customization on several sections, as follows:
 
 ![](./src/Figure2.png)
 
-**The degree of missingness on the dataset:** Since we are maximizing the task, the degree of missingness on the high side of the dataset indicates missingness near the optimal value, and the degree of missingness on the low side indicates missingness near the lowest value of the dataset. The optimization hopes to find the best possible solution, so missingness on the high side is more fatal, while missingness on the low side may affect the amount of training data to a greater extent. Users can adjust the difficulty of optimization by controlling the degree of missingness. Users can control it through:
+### Data Missingness Control
+
+Adjust the difficulty by controlling data missingness:
 
 ```python
-task.sample_bound(n, low=0, high=100)
+# low, high controls missingness degree. e.g. low=0, high=60 indicates that samples with the 40% largest objective value are pruned.
+task.sample_bound(n, low=0, high=60)
 ```
 
-**Data distribution:** Uniform distribution is too simple, and users can override the way data is sampled to adjust the difficulty of the task. Here is an example.
+### Custom Data Distribution
+
+Override sampling methods for custom distributions:
+
 ```python
-# in your python code
 import numpy as np
 import random
 from soo_bench.Taskdata import OfflineTask, register_task
 from soo_bench.Taskunit import Task_GTOPX
 
-# step1: override the taskunit you need.
 class Task_GTOPX_user(Task_GTOPX):
     TASK_NAME = 'user_gtopx_data'
+    
     def sample_x_ignore_constraints(self, num=2):
-        '''override this function instead of TaskUnit.sample_x'''
         result = []
-        
-        # replace the code below
-        x_values = []
         for _ in range(num):
-            for lower, upper in zip(self.xl, self.xu):
-                x = random.uniform(lower, upper)
-                x_values.append(x)
+            x_values = [random.uniform(lower, upper) for lower, upper in zip(self.xl, self.xu)]
             result.append(x_values)
-            x_values = []
-        
         return result
-# step2: register your own dataset
-register_task('user_gtopx_data',Task_GTOPX_user)
 
-# step3: use it
+register_task('user_gtopx_data', Task_GTOPX_user)
 task = OfflineTask('user_gtopx_data', benchmark=3, seed=1)
 task.sample_bound(10)
 print(task.x)
-print(task.y)
-print(task.predict(task.x))
-
-task = OfflineTask('user_gtopx_data', benchmark=2, seed=1)
-task.sample_x(10)
-task.sample_y()
-print(task.x)
-print(task.y)
-print(task.predict(task.x))
 ```
 
-
-**Constraints:** You can choose whether there are constraints on the task, for example, `benchmark=1` means constrained problem, and `benchmark=2` means unconstrained problem in gtopx task.
-
-## Citation
+## 📝 Citation
 ```
 @inproceedings{qian2025soobench,
  author = {Hong Qian and Yiyi Zhu and Xiang Shu and Shuo Liu and Yaolin Wen and Xin An and Huakang Lu and Aimin Zhou and Ke Tang and Yang Yu},
@@ -351,5 +311,4 @@ print(task.predict(task.x))
  address = {Singapore}
 }
 ```
-
 
