@@ -1,5 +1,7 @@
 <h1 align="center">SOO-Bench: Benchmarks for Evaluating the Stability of Offline Black-Box Optimization</h1>
-## Subtitle or Tagline
+
+**Hong Qian^1**, **Yiyi Zhu^1**, **Xiang Shu^1**, Shuo Liu1, Yaolin Wen1, Xin An1, Huakang Lu1, Aimin Zhou*1, Ke Tang2, Yang Yu3, 4
+
 
 ![](./src/Figure1.png)
 
