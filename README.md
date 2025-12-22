@@ -17,8 +17,15 @@
   ¹ <strong>East China Normal University</strong> | ² <strong>Southern University of Science and Technology</strong> | ³ <strong>Nanjing University</strong> | ⁴ <strong>Polixir Technologies, China</strong>
 </p>
 
-[![Paper](https://img.shields.io/badge/Paper-arXiv-red)](link)
-[![Code](https://img.shields.io/badge/GitHub-Repo-black)](link)
+<p align="center">
+  <a href="https://openreview.net/forum?id=bqf0aCF3Dd">
+    <img src="https://img.shields.io/badge/Paper-arXiv-red" />
+  </a>
+  <a href="link">
+    <img src="https://img.shields.io/badge/GitHub-Repo-black" />
+  </a>
+</p>
+
 
 ![](./src/Figure1.png)
 
