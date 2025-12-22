@@ -14,10 +14,11 @@
 </p>
 
 <p align="center">
-  ¹ <strong>East China Normal University</strong>, ² <strong>Southern University of Science and Technology</strong>, ³ <strong>Nanjing University</strong>, ⁴ <strong>Polixir Technologies, China</strong>
+  ¹ <strong>East China Normal University</strong> | ² <strong>Southern University of Science and Technology</strong> | ³ <strong>Nanjing University</strong> | ⁴ <strong>Polixir Technologies, China</strong>
 </p>
 
-
+[![Paper](https://img.shields.io/badge/Paper-arXiv-red)](link)
+[![Code](https://img.shields.io/badge/GitHub-Repo-black)](link)
 
 ![](./src/Figure1.png)
 
