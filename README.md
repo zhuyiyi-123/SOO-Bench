@@ -21,6 +21,9 @@
   <a href="https://openreview.net/forum?id=bqf0aCF3Dd">
     <img src="https://img.shields.io/badge/Paper-ICLR-red" />
   </a>
+  <a href="[link]([https://github.com/zhuyiyi-123/SOO-Bench](https://iclr.cc/media/PosterPDFs/ICLR%202025/29089.png?t=1744277452.3747146))">
+    <img src="https://img.shields.io/badge/Poster-ICLR-blue" />
+  </a>
   <a href="[link](https://github.com/zhuyiyi-123/SOO-Bench)">
     <img src="https://img.shields.io/badge/GitHub-Repo-black" />
   </a>
