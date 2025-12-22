@@ -38,38 +38,6 @@
 
 Offline optimization aims to make full use of the offline data and finally recommend potential high-quality solutions to be applied online without actively querying the solutions online. Due to the exploration nature of global optimization, optimizers may tend to try unseen out-of distribution solutions for potentially better performance (i.e., find much better solutions than the offline dataset). As the optimization procedure proceeds, the quality of solutions may tend to decline. It is difficult to determine when to stop the optimization procedure and return the final solution without active evaluation feedback. Previous work has suggested that by specifying the number of stopping steps for optimization, good results can be achieved by adjusting the step size or modifying the model for experiments. However, this is often not feasible in real life. Therefore, we hope to maintain a steady improvement throughout the optimization process, or at least maintain stability so that the solutions at any step will not be too bad.
 
-## 📊 Performance
-
-SOO-Bench evaluates algorithms across multiple dimensions including stability (SI) and optimality (FS). FS (final score) measures the function value found in the final optimization step, while SI (stability indicator) measures stability throughout the optimization process. Larger FS and SI values indicate better performance.
-
-### Unconstrained Optimization Results
-
-Overall results in unconstrained scenario. Results are averaged over five times, and "±" indicates the standard deviation.
-
-| Tasks | Cassini2 | | Reduced | | Full | | Rosetta | |
-|-------|----------|-|---------|-|------|-|---------|-|
-| $f(\mathcal{X}^{*}_{\rm OFF})$ | 196.21 | | 151.68 | | 216.34 | | 112.11 | |
-| Metrics | FS ↑ | SI ↑ | FS ↑ | SI ↑ | FS ↑ | SI ↑ | FS ↑ | SI ↑ |
-| BO | 95.45±18.43 | 0.69±0.02 | 75.78±29.38 | 0.70±0.03 | 117.39±17.11 | 0.68±0.04 | 58.11±8.25 | 0.63±0.04 |
-| CMAES | 196.21±1.18 | 0.00±0.00 | 151.68±0.53 | 0.00±0.00 | 216.34±0.61 | 0.00±0.00 | 112.11±0.38 | 0.00±0.00 |
-| CBAS | 196.21±1.18 | 0.00±0.00 | 86.51±3.97 | 0.71±0.06 | 208.80±15.50 | 0.14±0.02 | 87.08±31.05 | 0.34±0.09 |
-| TTDEEA | 224.17±53.87 | -2.34±2.58 | 156.92±91.05 | -2.28±2.78 | 260.40±54.89 | -∞ | 148.76±50.67 | -∞ |
-| ARCOO | 90.73±10.98 | 0.78±0.05 | 65.88±13.12 | 0.85±0.01 | 102.84±21.76 | 0.79±0.04 | 65.17±13.30 | 0.74±0.08 |
-| Tri-mentoring | 129.47±54.75 | -∞ | 140.23±22.88 | -∞ | 176.31±37.30 | 0.86±0.18 | 112.11±0.38 | -∞ |
-
-### Constrained Optimization Results
-
-Overall results in constrained scenario. The symbol "-" means that the algorithm cannot work because of too few solutions that satisfy the constraints.
-
-| Tasks | Cassini1 | | GTOC1 | | Cassini1-MINLP | |
-|-------|----------|-|-------|-|----------------|-|
-| $f(\mathcal{X}^{*}_{\rm OFF})$ | 75.30 | | 5.41 | | 346.20 | |
-| Metrics | FS ↑ | SI ↑ | FS ↑ | SI ↑ | FS ↑ | SI ↑ |
-| CARCOO | 72.97±5.64 | 0.34±0.04 | 1.08±5.85 | -∞ | 189.14±118.59 | 0.64±0.06 |
-| CCOMs | 68.61±108.20 | -0.94±0.55 | - | -∞ | 307.81±19.07 | 0.99±0.00 |
-| DDEA-PF | 282.57±35.59 | -∞ | 0.00±0.00 | -∞ | 953.59±27.33 | -∞ |
-| DDEA-SPF | 282.57±35.59 | -∞ | 0.00±0.00 | -∞ | 953.59±27.33 | -∞ |
-
 ## :wrench: Installation
 
 SOO-Bench can be installed with the complete set of benchmarks via our pip package. For a stable installation and usage, we suggest that you use `CUDA version 11.7`  or higher, and python > 3.8. 
