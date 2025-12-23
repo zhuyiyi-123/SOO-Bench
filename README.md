@@ -17,6 +17,8 @@
   ¹ <strong>East China Normal University</strong> | ² <strong>Southern University of Science and Technology</strong> | ³ <strong>Nanjing University</strong> | ⁴ <strong>Polixir Technologies, China</strong>
 </p>
 
+🎉 [2025/01/22]: Our paper "SOO-Bench: Benchmarks for Evaluating the Stability of Offline Black-Box Optimization" accepted by ICLR2025! 🔥
+
 <p align="center">
   <a href="https://openreview.net/forum?id=bqf0aCF3Dd">
     <img src="https://img.shields.io/badge/Paper-ICLR-red" />
