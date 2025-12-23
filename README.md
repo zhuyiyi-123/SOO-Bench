@@ -305,10 +305,11 @@ print(task.x)
 ```
 @inproceedings{qian2025soobench,
  author = {Hong Qian and Yiyi Zhu and Xiang Shu and Shuo Liu and Yaolin Wen and Xin An and Huakang Lu and Aimin Zhou and Ke Tang and Yang Yu},
- booktitle = {Proceedings of the 13th International Conference on Learning Representations},
  title = {SOO-Bench: Benchmarks for Evaluating the Stability of Offline Black-Box Optimization},
- year = {2025},
- address = {Singapore}
+ booktitle = {Proceedings of the Thirteenth International Conference on Learning Representations (ICLR)},
+ year      = {2025},
+ address   = {Singapore, Singapore},
+ url       = {https://openreview.net/forum?id=bqf0aCF3Dd}
 }
 ```
 
